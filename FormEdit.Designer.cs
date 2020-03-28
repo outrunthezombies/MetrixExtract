@@ -91,7 +91,7 @@
             this.BtnCancel.TabIndex = 12;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = true;
-            this.BtnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // BtnUpdate
             // 
@@ -101,7 +101,7 @@
             this.BtnUpdate.TabIndex = 11;
             this.BtnUpdate.Text = "Update";
             this.BtnUpdate.UseVisualStyleBackColor = true;
-            this.BtnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
             // 
             // LblType
             // 

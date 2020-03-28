@@ -29,7 +29,7 @@ namespace MetrixExtract
             get => iRecordType;
             set => iRecordType = value;
         }
-        private string sqlInsertUpdateCycleTime()
+        private string SqlInsertUpdateCycleTime()
         {
             if (iRecordType < 0)
             {
@@ -42,7 +42,7 @@ namespace MetrixExtract
             }
         }
 
-        private string sqlInsertUpdateHealth()
+        private string SqlInsertUpdateHealth()
         {
             if (iRecordType < 0)
             {
@@ -56,17 +56,17 @@ namespace MetrixExtract
                     "\", days = \"" + TxtValue.Text + "\" WHERE id=" + iRecordType.ToString();
             }
         }
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void BtnUpdate_Click(object sender, EventArgs e)
         {
             string sqlInsertUpdate = "";
 
             switch (pRecordType)
             {
                 case MetrixSharedCode.RecordType.CycleTime:
-                    sqlInsertUpdate = sqlInsertUpdateCycleTime();
+                    sqlInsertUpdate = SqlInsertUpdateCycleTime();
                     break;
                 case MetrixSharedCode.RecordType.Health:
-                    sqlInsertUpdate = sqlInsertUpdateHealth();
+                    sqlInsertUpdate = SqlInsertUpdateHealth();
                     break;
             }
 
@@ -83,7 +83,7 @@ namespace MetrixExtract
                 this.Close();
             }
         }
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
