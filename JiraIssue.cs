@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.TimeSpan;
 
 namespace MetrixExtract
 {
@@ -60,17 +55,14 @@ namespace MetrixExtract
             return MetrixSharedCode.GetSystemTimeAsString(issueWorkingTime[column]);
         }
         public string LeaveTimeAsStringByColumn(int column)
-        { 
+        {
+            DateTime dt = new DateTime(1970,1,1);
+            try
             {
-                try
-                {
-                    return (new DateTime(1970, 1, 1) + TimeSpan.FromMilliseconds(Convert.ToDouble(issueLeaveTime[column]))).ToString();
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.Print(ex.StackTrace);
-                    return DateTime.Now.ToString();
-                }
+                return (new DateTime(1970, 1, 1) + TimeSpan.FromMilliseconds(Convert.ToDouble(issueLeaveTime[column]))).ToLocalTime().ToString();
+            } catch (Exception ex) {
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+                return DateTime.Now.ToString();
             }
         }
     }
