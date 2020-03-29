@@ -28,7 +28,7 @@
         }
         public string GetCurrentTimeAsString
         {
-            get => MetrixSharedCode.GetSystemTimeAsString(lCurrentTime);
+            get => MetrixSharedCode.GetSystemTimeElapsedAsString(lCurrentTime);
         }
     }
 }

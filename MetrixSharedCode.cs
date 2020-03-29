@@ -99,11 +99,18 @@ public static class MetrixSharedCode
                 }
             }
         }
-
-        startAt += itemsPerPage;
     }
+    public static string GetDateStringFromTimeStamp(long timestamp, Boolean localtime=true)
+    {
+        DateTime dt = new DateTime(1970, 1, 1) + TimeSpan.FromMilliseconds(timestamp);
+        string returnValue = dt.ToLocalTime().ToString();
 
-    public static string GetSystemTimeAsString(long input)
+        if (!localtime)
+            returnValue = dt.ToString();
+
+        return returnValue;
+    }
+    public static string GetSystemTimeElapsedAsString(long input)
     {
         TimeSpan iSpan = TimeSpan.FromMilliseconds(input);
         string output = "";

@@ -9,12 +9,16 @@ namespace MetrixExtract
     class JiraWorkRateData
     {
         private int indexID;
+        private long workRateStart, workRateEnd, workRateRate;
+        private long CalculateRate()
+        {
+            return workRateEnd - workRateStart;
+        }
         public int Index
         {
             get => indexID;
             set => indexID = value;
         }
-        private long workRateStart, workRateEnd, workRateRate;
         public long RateStart
         {
             get => workRateStart;
@@ -30,13 +34,21 @@ namespace MetrixExtract
             get => workRateRate;
             set => workRateRate = value;
         }
-        public long CalculatedRate
+        public long GetCalculatedRate
         {
-            get => workRateEnd - workRateStart;
+            get => CalculateRate();
         }
-        public string CalculatedRateAsString
+        public string GetCalculatedRateAsString
         {
-            get => MetrixSharedCode.GetSystemTimeAsString(workRateEnd - workRateStart);
+            get => MetrixSharedCode.GetSystemTimeElapsedAsString(CalculateRate());
+        }
+        public string GetRateStartDateAsString()
+        {
+            return MetrixSharedCode.GetDateStringFromTimeStamp(workRateStart);
+        }
+        public string GetRateEndDateAsString()
+        {
+            return MetrixSharedCode.GetDateStringFromTimeStamp(workRateEnd);
         }
     }
 }

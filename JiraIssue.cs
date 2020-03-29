@@ -48,21 +48,11 @@ namespace MetrixExtract
         }
         public string TotalTimeAsStringByColumn(int column)
         {
-            return MetrixSharedCode.GetSystemTimeAsString(issueTotalTime[column]);
+            return MetrixSharedCode.GetSystemTimeElapsedAsString(issueTotalTime[column]);
         }
         public string WorkingTimeAsStringByColumn(int column)
         {
-            return MetrixSharedCode.GetSystemTimeAsString(issueWorkingTime[column]);
-        }
-        public string LeaveTimeAsStringByColumn(int column)
-        {
-            try
-            {
-                return (new DateTime(1970, 1, 1) + TimeSpan.FromMilliseconds(Convert.ToDouble(issueLeaveTime[column]))).ToLocalTime().ToString();
-            } catch (Exception ex) {
-                System.Diagnostics.Debug.Print(ex.StackTrace);
-                return DateTime.Now.ToString();
-            }
+            return MetrixSharedCode.GetSystemTimeElapsedAsString(issueWorkingTime[column]);
         }
     }
 }

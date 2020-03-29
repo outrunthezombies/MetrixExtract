@@ -39,11 +39,11 @@ namespace MetrixExtract
             foreach (JiraWorkRateData thing in jiraWorkRateDatas)
             {
                 output += "Index: " + thing.Index + Environment.NewLine
-                + "Rate Start: " + thing.RateStart + Environment.NewLine
-                + "Rate End: " + thing.RateEnd + Environment.NewLine
+                + "Rate Start: " + thing.RateStart + " - " + thing.GetRateStartDateAsString() + Environment.NewLine
+                + "Rate End: " + thing.RateEnd + " - " + thing.GetRateEndDateAsString() + Environment.NewLine
                 + "Rate: " + thing.Rate + Environment.NewLine
-                + "System Calculated Rate: " + thing.CalculatedRate + Environment.NewLine
-                + "System Calc. Rate Str: " + thing.CalculatedRateAsString + Environment.NewLine 
+                + "System Calculated Rate: " + thing.GetCalculatedRate + Environment.NewLine
+                + "System Calc. Rate Str: " + thing.GetCalculatedRateAsString + Environment.NewLine 
                 + Environment.NewLine;
             }
             TxtRates.Text += output;
@@ -64,7 +64,7 @@ namespace MetrixExtract
                 }
                 for (int i = 0; i < thing.LeaveTime.Length; i++)
                 {
-                    output += "Leave Time - " + jiraColumns[i].Name + ": " + thing.LeaveTime[i] + ", " + thing.LeaveTimeAsStringByColumn(i) + Environment.NewLine;
+                    output += "Leave Time - " + jiraColumns[i].Name + ": " + thing.LeaveTime[i] + ", " + MetrixSharedCode.GetSystemTimeElapsedAsString(thing.LeaveTime[i]) + Environment.NewLine;
                 }
                 for (int i = 0; i < thing.TotalTime.Length; i++)
                 {
