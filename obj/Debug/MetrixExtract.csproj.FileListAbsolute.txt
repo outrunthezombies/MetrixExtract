@@ -13,7 +13,8 @@ C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.c
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.FormEdit.resources
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.FormGraph.resources
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.FormJson.resources
-C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.FormMain.resources
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\bin\Debug\Atlassian.Jira.dll
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\bin\Debug\RestSharp.dll
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\bin\Debug\RestSharp.xml
+C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.FormStart.resources
+C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.FormManualData.resources

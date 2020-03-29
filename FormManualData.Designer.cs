@@ -1,6 +1,6 @@
 ﻿namespace MetrixExtract
 {
-    partial class FormMain
+    partial class FormManualData
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,6 @@
             this.Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CycleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BtnJsonTest = new System.Windows.Forms.Button();
             this.BtnChartData = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.CboCycleType = new System.Windows.Forms.ComboBox();
@@ -101,16 +100,6 @@
             this.CycleTime.HeaderText = "Cycle Time";
             this.CycleTime.Name = "CycleTime";
             this.CycleTime.ReadOnly = true;
-            // 
-            // BtnJsonTest
-            // 
-            this.BtnJsonTest.Location = new System.Drawing.Point(231, 39);
-            this.BtnJsonTest.Name = "BtnJsonTest";
-            this.BtnJsonTest.Size = new System.Drawing.Size(85, 23);
-            this.BtnJsonTest.TabIndex = 21;
-            this.BtnJsonTest.Text = "JSON Test";
-            this.BtnJsonTest.UseVisualStyleBackColor = true;
-            this.BtnJsonTest.Click += new System.EventHandler(this.BtnJsonTest_Click);
             // 
             // BtnChartData
             // 
@@ -180,14 +169,13 @@
             this.CboTeam.Size = new System.Drawing.Size(77, 21);
             this.CboTeam.TabIndex = 14;
             // 
-            // FormMain
+            // FormManualData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 290);
             this.Controls.Add(this.BtnCycle);
             this.Controls.Add(this.GrpCycleTimes);
-            this.Controls.Add(this.BtnJsonTest);
             this.Controls.Add(this.BtnChartData);
             this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.CboCycleType);
@@ -195,7 +183,7 @@
             this.Controls.Add(this.CboLob);
             this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.CboTeam);
-            this.Name = "FormMain";
+            this.Name = "FormManualData";
             this.Text = "Metrix Extract";
             this.GrpCycleTimes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
@@ -211,7 +199,6 @@
         internal System.Windows.Forms.DataGridViewTextBoxColumn Index;
         internal System.Windows.Forms.DataGridViewTextBoxColumn CycleDate;
         internal System.Windows.Forms.DataGridViewTextBoxColumn CycleTime;
-        internal System.Windows.Forms.Button BtnJsonTest;
         internal System.Windows.Forms.Button BtnChartData;
         internal System.Windows.Forms.Button BtnEdit;
         internal System.Windows.Forms.ComboBox CboCycleType;

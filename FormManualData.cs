@@ -4,9 +4,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MetrixExtract
 {
-    public partial class FormMain : Form
+    public partial class FormManualData : Form
     {
-        public FormMain()
+        public FormManualData()
         {
             InitializeComponent();
             PopulateCycleTypes();
@@ -15,13 +15,6 @@ namespace MetrixExtract
 
         private string sqlCycleTimes = "SELECT ID,cycle_date,days From Cycle_Time";
         private string sqlDeleteCycleTime = "DELETE FROM Cycle_Time WHERE id=";
-
-        private void BtnJsonTest_Click(object sender, EventArgs e)
-        {
-            FormJson frmJson = new FormJson();
-            frmJson.ShowDialog();
-        }
-
         private void BtnCycle_Click(object sender, EventArgs e)
         {
             LoadCycleTimeTable();
