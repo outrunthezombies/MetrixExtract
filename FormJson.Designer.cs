@@ -38,25 +38,25 @@
             // 
             // TxtIssues
             // 
-            this.TxtIssues.Location = new System.Drawing.Point(490, 41);
+            this.TxtIssues.Location = new System.Drawing.Point(12, 158);
             this.TxtIssues.Multiline = true;
             this.TxtIssues.Name = "TxtIssues";
             this.TxtIssues.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtIssues.Size = new System.Drawing.Size(692, 253);
+            this.TxtIssues.Size = new System.Drawing.Size(545, 674);
             this.TxtIssues.TabIndex = 7;
             // 
             // TxtRates
             // 
-            this.TxtRates.Location = new System.Drawing.Point(490, 300);
+            this.TxtRates.Location = new System.Drawing.Point(563, 41);
             this.TxtRates.Multiline = true;
             this.TxtRates.Name = "TxtRates";
             this.TxtRates.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtRates.Size = new System.Drawing.Size(692, 248);
+            this.TxtRates.Size = new System.Drawing.Size(545, 495);
             this.TxtRates.TabIndex = 6;
             // 
             // BtnParse
             // 
-            this.BtnParse.Location = new System.Drawing.Point(490, 12);
+            this.BtnParse.Location = new System.Drawing.Point(637, 12);
             this.BtnParse.Name = "BtnParse";
             this.BtnParse.Size = new System.Drawing.Size(75, 23);
             this.BtnParse.TabIndex = 5;
@@ -69,24 +69,24 @@
             this.TxtJson.Location = new System.Drawing.Point(12, 12);
             this.TxtJson.Multiline = true;
             this.TxtJson.Name = "TxtJson";
-            this.TxtJson.Size = new System.Drawing.Size(472, 282);
+            this.TxtJson.Size = new System.Drawing.Size(545, 140);
             this.TxtJson.TabIndex = 4;
             this.TxtJson.Text = resources.GetString("TxtJson.Text");
             // 
             // TxtColumns
             // 
-            this.TxtColumns.Location = new System.Drawing.Point(12, 300);
+            this.TxtColumns.Location = new System.Drawing.Point(563, 542);
             this.TxtColumns.Multiline = true;
             this.TxtColumns.Name = "TxtColumns";
             this.TxtColumns.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtColumns.Size = new System.Drawing.Size(472, 247);
+            this.TxtColumns.Size = new System.Drawing.Size(545, 290);
             this.TxtColumns.TabIndex = 8;
             // 
             // FormJson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1195, 559);
+            this.ClientSize = new System.Drawing.Size(1121, 844);
             this.Controls.Add(this.TxtColumns);
             this.Controls.Add(this.TxtIssues);
             this.Controls.Add(this.TxtRates);

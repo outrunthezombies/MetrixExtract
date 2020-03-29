@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MetrixExtract
@@ -25,33 +20,32 @@ namespace MetrixExtract
         private void SpitOutColumnValues(string header)
         {
             string output = "";
-            output += header + System.Environment.NewLine;
-            output += "______________________________________" + System.Environment.NewLine;
+            output += header + Environment.NewLine;
+            output += "______________________________________" + Environment.NewLine + Environment.NewLine;
             foreach (JiraColumn thing in jiraColumns)
             {
-                output += "Index: " + thing.Index + System.Environment.NewLine
-                + "ID: " + thing.ID + System.Environment.NewLine
-                + "Name: " + thing.Name + System.Environment.NewLine
-                + System.Environment.NewLine + System.Environment.NewLine;
+                output += "Index: " + thing.Index + Environment.NewLine
+                + "ID: " + thing.ID + Environment.NewLine
+                + "Name: " + thing.Name + Environment.NewLine
+                + Environment.NewLine;
             }
-            output += "______________________________________" + System.Environment.NewLine + System.Environment.NewLine;
             TxtColumns.Text += output;
         }
         private void SpitOutWorkRateValues(string header)
         {
             string output = "";
-            output += header + System.Environment.NewLine;
-            output += "______________________________________" + System.Environment.NewLine;
+            output += header + Environment.NewLine;
+            output += "______________________________________" + Environment.NewLine + Environment.NewLine;
             foreach (JiraWorkRateData thing in jiraWorkRateDatas)
             {
-                output += "Index: " + thing.Index + System.Environment.NewLine
-                + "Rate Start: " + thing.RateStart + System.Environment.NewLine
-                + "Rate End: " + thing.RateEnd + System.Environment.NewLine
-                + "System Calculated Rate: " + thing.CalculatedRate + System.Environment.NewLine
-                + "System Calc. Rate Str: " + thing.CalculatedRateAsString
-                + System.Environment.NewLine + System.Environment.NewLine;
+                output += "Index: " + thing.Index + Environment.NewLine
+                + "Rate Start: " + thing.RateStart + Environment.NewLine
+                + "Rate End: " + thing.RateEnd + Environment.NewLine
+                + "Rate: " + thing.Rate + Environment.NewLine
+                + "System Calculated Rate: " + thing.CalculatedRate + Environment.NewLine
+                + "System Calc. Rate Str: " + thing.CalculatedRateAsString + Environment.NewLine 
+                + Environment.NewLine;
             }
-            output += "______________________________________" + System.Environment.NewLine + System.Environment.NewLine;
             TxtRates.Text += output;
         }
         private void SpitOutIssueValues()
@@ -60,23 +54,23 @@ namespace MetrixExtract
 
             foreach (JiraIssue thing in jiraIssues)
             {
-                output += "Key: " + thing.Key + System.Environment.NewLine
-                    + "Summary: " + thing.Summary + System.Environment.NewLine
-                    + "Swimlane ID: " + thing.SwimLaneID + System.Environment.NewLine;
+                output += "Key: " + thing.Key + Environment.NewLine
+                    + "Summary: " + thing.Summary + Environment.NewLine
+                    + "Swimlane ID: " + thing.SwimLaneID + Environment.NewLine;
                 for (int i = 0; i < thing.WorkingTime.Length; i++)
                 {
                     output += "Working Time - " + jiraColumns[i].Name + ": " 
-                            + thing.WorkingTime[i] + ", " + thing.WorkingTimeAsStringByColumn(i) + System.Environment.NewLine;
+                            + thing.WorkingTime[i] + ", " + thing.WorkingTimeAsStringByColumn(i) + Environment.NewLine;
                 }
                 for (int i = 0; i < thing.LeaveTime.Length; i++)
                 {
-                    output += "Leave Time - " + jiraColumns[i].Name + ": " + thing.LeaveTime[i] + ", " + thing.LeaveTimeAsStringByColumn(i) + System.Environment.NewLine;
+                    output += "Leave Time - " + jiraColumns[i].Name + ": " + thing.LeaveTime[i] + ", " + thing.LeaveTimeAsStringByColumn(i) + Environment.NewLine;
                 }
                 for (int i = 0; i < thing.TotalTime.Length; i++)
                 {
-                    output += "Total Time - " + jiraColumns[i].Name + ": " + thing.TotalTime[i] + ", " + thing.TotalTimeAsStringByColumn(i) + System.Environment.NewLine;
+                    output += "Total Time - " + jiraColumns[i].Name + ": " + thing.TotalTime[i] + ", " + thing.TotalTimeAsStringByColumn(i) + Environment.NewLine;
                 }
-                output += "______________________________________" + System.Environment.NewLine + System.Environment.NewLine;
+                output += "______________________________________" + Environment.NewLine + Environment.NewLine;
                 }
             TxtIssues.Text = output;
         }
@@ -167,9 +161,8 @@ namespace MetrixExtract
                             jiraColumn.Index = columnIndex;
                             jiraColumns.Add(jiraColumn);
                             columnIndex++;
-                            SpitOutColumnValues("After Column: " + columnIndex);
                         }
-                        SpitOutColumnValues("After All Columns:");
+                        SpitOutColumnValues("All Columns:");
                         break;
                     case "workRateData":
                         List<JToken> workRateData = item.Children().Children().ToList();
@@ -209,7 +202,6 @@ namespace MetrixExtract
                                         workRateValue.Index = workRateDataIndex;
                                         jiraWorkRateDatas.Add(workRateValue);
                                         workRateDataIndex++;
-                                        SpitOutWorkRateValues("After Rate: " + workRateDataIndex);
                                     }
                                     break;
                             }
