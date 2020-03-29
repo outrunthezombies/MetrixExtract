@@ -33,6 +33,7 @@
             this.TxtRates = new System.Windows.Forms.TextBox();
             this.BtnParse = new System.Windows.Forms.Button();
             this.TxtJson = new System.Windows.Forms.TextBox();
+            this.TxtColumns = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // TxtIssues
@@ -68,15 +69,25 @@
             this.TxtJson.Location = new System.Drawing.Point(12, 12);
             this.TxtJson.Multiline = true;
             this.TxtJson.Name = "TxtJson";
-            this.TxtJson.Size = new System.Drawing.Size(472, 536);
+            this.TxtJson.Size = new System.Drawing.Size(472, 282);
             this.TxtJson.TabIndex = 4;
             this.TxtJson.Text = resources.GetString("TxtJson.Text");
+            // 
+            // TxtColumns
+            // 
+            this.TxtColumns.Location = new System.Drawing.Point(12, 300);
+            this.TxtColumns.Multiline = true;
+            this.TxtColumns.Name = "TxtColumns";
+            this.TxtColumns.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtColumns.Size = new System.Drawing.Size(472, 247);
+            this.TxtColumns.TabIndex = 8;
             // 
             // FormJson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1195, 559);
+            this.Controls.Add(this.TxtColumns);
             this.Controls.Add(this.TxtIssues);
             this.Controls.Add(this.TxtRates);
             this.Controls.Add(this.BtnParse);
@@ -94,5 +105,6 @@
         internal System.Windows.Forms.TextBox TxtRates;
         internal System.Windows.Forms.Button BtnParse;
         internal System.Windows.Forms.TextBox TxtJson;
+        internal System.Windows.Forms.TextBox TxtColumns;
     }
 }

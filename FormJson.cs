@@ -20,6 +20,7 @@ namespace MetrixExtract
 
         private List<JiraIssue> jiraIssues = new List<JiraIssue>();
         private List<JiraColumn> jiraColumns = new List<JiraColumn>();
+        private List<JiraWorkRateData> jiraWorkRateDatas = new List<JiraWorkRateData>();
 
         private void SpitOutColumnValues(string header)
         {
@@ -31,6 +32,19 @@ namespace MetrixExtract
                 output += "Index: " + thing.Index + System.Environment.NewLine
                 + "ID: " + thing.ID + System.Environment.NewLine
                 + "Name: " + thing.Name + System.Environment.NewLine
+                + System.Environment.NewLine + System.Environment.NewLine;
+            }
+            output += "______________________________________" + System.Environment.NewLine + System.Environment.NewLine;
+            TxtColumns.Text += output;
+        }
+        private void SpitOutWorkRateValues(string header)
+        {
+            string output = "";
+            output += header + System.Environment.NewLine;
+            output += "______________________________________" + System.Environment.NewLine;
+            foreach (JiraWorkRateData thing in jiraWorkRateDatas)
+            {
+                output += "Index: " + thing.Index + System.Environment.NewLine
                 + "Rate Start: " + thing.RateStart + System.Environment.NewLine
                 + "Rate End: " + thing.RateEnd + System.Environment.NewLine
                 + "System Calculated Rate: " + thing.CalculatedRate + System.Environment.NewLine
@@ -38,9 +52,8 @@ namespace MetrixExtract
                 + System.Environment.NewLine + System.Environment.NewLine;
             }
             output += "______________________________________" + System.Environment.NewLine + System.Environment.NewLine;
-            TxtRates.Text = output;
+            TxtRates.Text += output;
         }
-
         private void SpitOutIssueValues()
         {
             string output = "";
@@ -154,8 +167,9 @@ namespace MetrixExtract
                             jiraColumn.Index = columnIndex;
                             jiraColumns.Add(jiraColumn);
                             columnIndex++;
+                            SpitOutColumnValues("After Column: " + columnIndex);
                         }
-                        SpitOutColumnValues("After Columns:");
+                        SpitOutColumnValues("After All Columns:");
                         break;
                     case "workRateData":
                         List<JToken> workRateData = item.Children().Children().ToList();
@@ -169,12 +183,12 @@ namespace MetrixExtract
                                     break;
                                 case "rates":
                                     List<JToken> rates = workRate.Children().Children().ToList();
-                                    int index = 0;
+                                    int workRateDataIndex = 0;
                                     foreach (JObject rate in rates)
                                     {
                                         rate.CreateReader();
                                         List<JToken> values = rate.Children().ToList();
-                                        JiraColumn tempColumn = jiraColumns[index];
+                                        JiraWorkRateData workRateValue = new JiraWorkRateData();
 
                                         foreach (JProperty value in values)
                                         {
@@ -182,24 +196,25 @@ namespace MetrixExtract
                                             switch (value.Name)
                                             {
                                                 case "start":
-                                                    tempColumn.RateStart = (long)value.Value;
+                                                    workRateValue.RateStart = (long)value.Value;
                                                     break;
                                                 case "end":
-                                                    tempColumn.RateEnd = (long)value.Value;
+                                                    workRateValue.RateEnd = (long)value.Value;
                                                     break;
                                                 case "rate":
-                                                    tempColumn.Rate = (long)value.Value;
+                                                    workRateValue.Rate = (long)value.Value;
                                                     break;
                                             }
                                         }
-                                        jiraColumns[index] = tempColumn;
-                                        SpitOutColumnValues("After Rate: " + index);
-                                        index++;
+                                        workRateValue.Index = workRateDataIndex;
+                                        jiraWorkRateDatas.Add(workRateValue);
+                                        workRateDataIndex++;
+                                        SpitOutWorkRateValues("After Rate: " + workRateDataIndex);
                                     }
                                     break;
                             }
                         }
-                        SpitOutColumnValues("After All Values:");
+                        SpitOutWorkRateValues("After All Values:");
                         SpitOutIssueValues();
                         break;
                 }

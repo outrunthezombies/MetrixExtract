@@ -56,7 +56,6 @@ namespace MetrixExtract
         }
         public string LeaveTimeAsStringByColumn(int column)
         {
-            DateTime dt = new DateTime(1970,1,1);
             try
             {
                 return (new DateTime(1970, 1, 1) + TimeSpan.FromMilliseconds(Convert.ToDouble(issueLeaveTime[column]))).ToLocalTime().ToString();

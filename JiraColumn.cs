@@ -20,29 +20,15 @@
             get => columnName;
             set => columnName = value;
         }
-        private long workRateStart, workRateEnd, workRateRate;
-        public long RateStart
+        private long lCurrentTime;
+        public long CurrentTime
         {
-            get => workRateStart;
-            set => workRateStart = value;
+            get => lCurrentTime;
+            set => lCurrentTime = value;
         }
-        public long RateEnd
+        public string GetCurrentTimeAsString
         {
-            get => workRateEnd;
-            set => workRateEnd = value;
-        }
-        public long Rate
-        {
-            get => workRateRate;
-            set => workRateRate = value;
-        }
-        public long CalculatedRate
-        {
-            get => workRateEnd - workRateStart;
-        }
-        public string CalculatedRateAsString
-        {
-            get => MetrixSharedCode.GetSystemTimeAsString(workRateEnd - workRateStart);
+            get => MetrixSharedCode.GetSystemTimeAsString(lCurrentTime);
         }
     }
 }
