@@ -29,9 +29,9 @@ namespace MetrixExtract
             string output = header + Environment.NewLine + "______________________________________" + Environment.NewLine + Environment.NewLine;
             foreach (JiraColumn thing in jiraColumns)
             {
-                output += "Index: " + thing.Index + Environment.NewLine
-                + "ID: " + thing.ID + Environment.NewLine
-                + "Name: " + thing.Name + Environment.NewLine
+                output += "Index:\t" + thing.Index + Environment.NewLine
+                + "ID:\t" + thing.ID + Environment.NewLine
+                + "Name:\t" + thing.Name + Environment.NewLine
                 + Environment.NewLine;
             }
             TxtColumns.Text = output;
@@ -64,9 +64,9 @@ namespace MetrixExtract
                 for (int i = 0; i < thing.WorkingTime.Length && i < thing.LeaveTime.Length && i < thing.TotalTime.Length; i++)
                 {
                     output += "Column: " + jiraColumns[i].Name + Environment.NewLine
-                        + "\tWorking Time: " + thing.WorkingTimeAsStringByColumn(i) + " (" + thing.WorkingTime[i] + ")" + Environment.NewLine
-                        + "\tLeave Time: " + MetrixSharedCode.GetDateStringFromTimeStamp(thing.LeaveTime[i]) + " (" + thing.LeaveTime[i] + ")" + Environment.NewLine
-                        + "\tTotal Time: " + thing.TotalTimeAsStringByColumn(i) + " (" + thing.TotalTime[i] + ")" + Environment.NewLine;
+                        + "\tLeave Time:\t" + MetrixSharedCode.GetDateStringFromTimeStamp(thing.LeaveTime[i]) + " (" + thing.LeaveTime[i] + ")" + Environment.NewLine
+                        + "\tWorking Time:\t" + thing.WorkingTimeAsStringByColumn(i) + " (" + thing.WorkingTime[i] + ")" + Environment.NewLine
+                        + "\tTotal Time:\t" + thing.TotalTimeAsStringByColumn(i) + " (" + thing.TotalTime[i] + ")" + Environment.NewLine;
                 }
                 output += "______________________________________" + Environment.NewLine + Environment.NewLine;
                 }
@@ -250,7 +250,7 @@ namespace MetrixExtract
                         output += jiraIssue.Key + ": "
                             + "\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempWorkingTime) + " (W)" + Environment.NewLine
                             + "\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempTotalTime) + " (T)"
-                            + Environment.NewLine;
+                            + Environment.NewLine + Environment.NewLine;
                     }
                 }
                 if (jiraIssueCount > 0)
