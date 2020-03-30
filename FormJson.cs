@@ -71,7 +71,7 @@ namespace MetrixExtract
                 }
                 for (int i = 0; i < thing.LeaveTime.Length; i++)
                 {
-                    output += "Leave Time - " + jiraColumns[i].Name + ": " + thing.LeaveTime[i] + ", " + MetrixSharedCode.GetSystemTimeElapsedAsString(thing.LeaveTime[i]) + Environment.NewLine;
+                    output += "Leave Time - " + jiraColumns[i].Name + ": " + thing.LeaveTime[i] + ", " + MetrixSharedCode.GetDateStringFromTimeStamp(thing.LeaveTime[i]) + Environment.NewLine;
                 }
                 for (int i = 0; i < thing.TotalTime.Length; i++)
                 {
@@ -255,7 +255,7 @@ namespace MetrixExtract
                 foreach (JiraIssue jiraIssue in jiraIssues)
                 {
                     long temp = jiraIssue.GetTotalTimeByColumn(1);
-                    if (temp > 0)
+                    if (temp > 0 && jiraIssue.LeaveTime[2] >= 0)
                     {
                         jiraIssueCount++;
                         totalTime += temp;
@@ -264,7 +264,9 @@ namespace MetrixExtract
                 }
                 if (jiraIssueCount > 0)
                 {
-                    output += Environment.NewLine + "Average: " + MetrixSharedCode.GetSystemTimeElapsedAsString(totalTime / jiraIssueCount);
+                    output = "Average: " + MetrixSharedCode.GetSystemTimeElapsedAsString(totalTime / jiraIssueCount) 
+                        + Environment.NewLine + "________________________________________"
+                        + Environment.NewLine + Environment.NewLine + output;
                 } else
                 {
                     output += "No issues!";

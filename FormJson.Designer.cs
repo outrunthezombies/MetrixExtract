@@ -91,7 +91,7 @@
             // 
             // BtnAverage
             // 
-            this.BtnAverage.Location = new System.Drawing.Point(728, 12);
+            this.BtnAverage.Location = new System.Drawing.Point(563, 12);
             this.BtnAverage.Name = "BtnAverage";
             this.BtnAverage.Size = new System.Drawing.Size(75, 23);
             this.BtnAverage.TabIndex = 9;
