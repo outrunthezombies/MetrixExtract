@@ -26,9 +26,7 @@ namespace MetrixExtract
         }
         private void SpitOutColumnValues(string header)
         {
-            string output = "";
-            output += header + Environment.NewLine;
-            output += "______________________________________" + Environment.NewLine + Environment.NewLine;
+            string output = header + Environment.NewLine + "______________________________________" + Environment.NewLine + Environment.NewLine;
             foreach (JiraColumn thing in jiraColumns)
             {
                 output += "Index: " + thing.Index + Environment.NewLine
@@ -36,12 +34,11 @@ namespace MetrixExtract
                 + "Name: " + thing.Name + Environment.NewLine
                 + Environment.NewLine;
             }
-            TxtColumns.Text += output;
+            TxtColumns.Text = output;
         }
         private void SpitOutWorkRateValues(string header)
         {
-            string output = "";
-            output += header + Environment.NewLine;
+            string output = header + Environment.NewLine;
             output += "______________________________________" + Environment.NewLine + Environment.NewLine;
             foreach (JiraWorkRateData thing in jiraWorkRateDatas)
             {
@@ -53,7 +50,7 @@ namespace MetrixExtract
                 + "System Calc. Rate Str: " + thing.GetCalculatedRateAsString + Environment.NewLine 
                 + Environment.NewLine;
             }
-            TxtWorkRates.Text += output;
+            TxtWorkRates.Text = output;
         }
         private void SpitOutIssueValues()
         {
@@ -106,14 +103,9 @@ namespace MetrixExtract
             }
             JObject json = JObject.Parse(jsonText);
             List<JToken> data = json.Children().ToList();
-            TxtWorkRates.Clear();
-            TxtWorkRates.Text = "";
-            TxtAverage.Clear();
-            TxtAverage.Text = "";
-            TxtColumns.Clear();
-            TxtColumns.Text = "";
             jiraIssues.Clear();
             jiraColumns.Clear();
+            jiraWorkRateDatas.Clear();
 
             if (jsonText == "")
             {

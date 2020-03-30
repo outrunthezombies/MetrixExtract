@@ -52,11 +52,11 @@
             // 
             // TxtWorkRates
             // 
-            this.TxtWorkRates.Location = new System.Drawing.Point(563, 222);
+            this.TxtWorkRates.Location = new System.Drawing.Point(563, 267);
             this.TxtWorkRates.Multiline = true;
             this.TxtWorkRates.Name = "TxtWorkRates";
             this.TxtWorkRates.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtWorkRates.Size = new System.Drawing.Size(545, 404);
+            this.TxtWorkRates.Size = new System.Drawing.Size(545, 328);
             this.TxtWorkRates.TabIndex = 6;
             // 
             // BtnParseFromTextBox
@@ -81,11 +81,11 @@
             // 
             // TxtColumns
             // 
-            this.TxtColumns.Location = new System.Drawing.Point(563, 632);
+            this.TxtColumns.Location = new System.Drawing.Point(563, 601);
             this.TxtColumns.Multiline = true;
             this.TxtColumns.Name = "TxtColumns";
             this.TxtColumns.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtColumns.Size = new System.Drawing.Size(545, 200);
+            this.TxtColumns.Size = new System.Drawing.Size(545, 231);
             this.TxtColumns.TabIndex = 8;
             // 
             // TxtAverage
@@ -94,7 +94,7 @@
             this.TxtAverage.Multiline = true;
             this.TxtAverage.Name = "TxtAverage";
             this.TxtAverage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtAverage.Size = new System.Drawing.Size(545, 204);
+            this.TxtAverage.Size = new System.Drawing.Size(545, 249);
             this.TxtAverage.TabIndex = 10;
             // 
             // BtnLoadAndParseJSON
