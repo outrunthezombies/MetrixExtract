@@ -34,7 +34,6 @@
             this.BtnParseFromTextBox = new System.Windows.Forms.Button();
             this.TxtJson = new System.Windows.Forms.TextBox();
             this.TxtColumns = new System.Windows.Forms.TextBox();
-            this.BtnAverage = new System.Windows.Forms.Button();
             this.TxtAverage = new System.Windows.Forms.TextBox();
             this.BtnLoadAndParseJSON = new System.Windows.Forms.Button();
             this.TxtJSONPath = new System.Windows.Forms.TextBox();
@@ -89,23 +88,13 @@
             this.TxtColumns.Size = new System.Drawing.Size(545, 200);
             this.TxtColumns.TabIndex = 8;
             // 
-            // BtnAverage
-            // 
-            this.BtnAverage.Location = new System.Drawing.Point(563, 12);
-            this.BtnAverage.Name = "BtnAverage";
-            this.BtnAverage.Size = new System.Drawing.Size(75, 23);
-            this.BtnAverage.TabIndex = 9;
-            this.BtnAverage.Text = "Average";
-            this.BtnAverage.UseVisualStyleBackColor = true;
-            this.BtnAverage.Click += new System.EventHandler(this.BtnAverage_Click);
-            // 
             // TxtAverage
             // 
-            this.TxtAverage.Location = new System.Drawing.Point(563, 41);
+            this.TxtAverage.Location = new System.Drawing.Point(563, 12);
             this.TxtAverage.Multiline = true;
             this.TxtAverage.Name = "TxtAverage";
             this.TxtAverage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtAverage.Size = new System.Drawing.Size(545, 175);
+            this.TxtAverage.Size = new System.Drawing.Size(545, 204);
             this.TxtAverage.TabIndex = 10;
             // 
             // BtnLoadAndParseJSON
@@ -155,7 +144,6 @@
             this.Controls.Add(this.TxtJSONPath);
             this.Controls.Add(this.BtnLoadAndParseJSON);
             this.Controls.Add(this.TxtAverage);
-            this.Controls.Add(this.BtnAverage);
             this.Controls.Add(this.TxtColumns);
             this.Controls.Add(this.TxtIssues);
             this.Controls.Add(this.TxtWorkRates);
@@ -175,7 +163,6 @@
         internal System.Windows.Forms.Button BtnParseFromTextBox;
         internal System.Windows.Forms.TextBox TxtJson;
         internal System.Windows.Forms.TextBox TxtColumns;
-        private System.Windows.Forms.Button BtnAverage;
         internal System.Windows.Forms.TextBox TxtAverage;
         private System.Windows.Forms.Button BtnLoadAndParseJSON;
         private System.Windows.Forms.TextBox TxtJSONPath;

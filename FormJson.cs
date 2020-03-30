@@ -64,18 +64,12 @@ namespace MetrixExtract
                 output += "Key: " + thing.Key + Environment.NewLine
                     + "Summary: " + thing.Summary + Environment.NewLine
                     + "Swimlane ID: " + thing.SwimLaneID + Environment.NewLine;
-                for (int i = 0; i < thing.WorkingTime.Length; i++)
+                for (int i = 0; i < thing.WorkingTime.Length && i < thing.LeaveTime.Length && i < thing.TotalTime.Length; i++)
                 {
-                    output += "Working Time - " + jiraColumns[i].Name + ": " 
-                            + thing.WorkingTime[i] + ", " + thing.WorkingTimeAsStringByColumn(i) + Environment.NewLine;
-                }
-                for (int i = 0; i < thing.LeaveTime.Length; i++)
-                {
-                    output += "Leave Time - " + jiraColumns[i].Name + ": " + thing.LeaveTime[i] + ", " + MetrixSharedCode.GetDateStringFromTimeStamp(thing.LeaveTime[i]) + Environment.NewLine;
-                }
-                for (int i = 0; i < thing.TotalTime.Length; i++)
-                {
-                    output += "Total Time - " + jiraColumns[i].Name + ": " + thing.TotalTime[i] + ", " + thing.TotalTimeAsStringByColumn(i) + Environment.NewLine;
+                    output += "Column: " + jiraColumns[i].Name + Environment.NewLine
+                        + "- Working Time: " + thing.WorkingTimeAsStringByColumn(i) + " (" + thing.WorkingTime[i] + ")" + Environment.NewLine
+                        + "- Leave Time: " + MetrixSharedCode.GetDateStringFromTimeStamp(thing.LeaveTime[i]) + " (" + thing.LeaveTime[i] + ")" + Environment.NewLine
+                        + "- Total Time: " + thing.TotalTimeAsStringByColumn(i) + " (" + thing.TotalTime[i] + ")" + Environment.NewLine;
                 }
                 output += "______________________________________" + Environment.NewLine + Environment.NewLine;
                 }
@@ -124,9 +118,7 @@ namespace MetrixExtract
             if (jsonText == "")
             {
                 TxtAverage.Text = "Nothing to parse!";
-            }
-            else
-            {
+            }  else {
                 foreach (JProperty item in data)
                 {
                     item.CreateReader();
@@ -242,15 +234,16 @@ namespace MetrixExtract
                             break;
                     }
                 }
+                CalculateAverageCycleTime();
             }
             this.Cursor = Cursors.Default;
         }
-        private void BtnAverage_Click(object sender, EventArgs e)
+        private void CalculateAverageCycleTime()
         {
+            string output = "Nothing to Average!";
             if (jiraIssues.Count > 0)
             {
                 long totalTime = 0;
-                string output = "";
                 int jiraIssueCount = 0;
                 foreach (JiraIssue jiraIssue in jiraIssues)
                 {
@@ -264,18 +257,14 @@ namespace MetrixExtract
                 }
                 if (jiraIssueCount > 0)
                 {
-                    output = "Average: " + MetrixSharedCode.GetSystemTimeElapsedAsString(totalTime / jiraIssueCount) 
+                    output = "Total issues in JSON: " + jiraIssues.Count + Environment.NewLine
+                        + "Average of " + jiraIssueCount + " Items: " + MetrixSharedCode.GetSystemTimeElapsedAsString(totalTime / jiraIssueCount)
                         + Environment.NewLine + "________________________________________"
-                        + Environment.NewLine + Environment.NewLine + output;
-                } else
-                {
-                    output += "No issues!";
+                        + Environment.NewLine + Environment.NewLine 
+                        + output;
                 }
                 TxtAverage.Text = output;
-            } else
-            {
-                TxtAverage.Text = "Nothing to Average!";
-            }    
+            }
         }
         private void BtnLoadJSON_Click(object sender, EventArgs e)
         {
