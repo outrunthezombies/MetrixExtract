@@ -32,10 +32,20 @@ namespace MetrixExtract
             get => issueTotalTime;
             set => issueTotalTime = value;
         }
+        public long GetTotalTimeByColumn(int column)
+        {
+            return issueTotalTime[column];
+
+        }
         public long[] WorkingTime
         {
             get => issueWorkingTime;
             set => issueWorkingTime = value;
+        }
+        public long GetWorkingTimeByColumn(int column)
+        {
+            return issueWorkingTime[column];
+
         }
         public long[] LeaveTime
         {
