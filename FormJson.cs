@@ -18,6 +18,7 @@ namespace MetrixExtract
         private List<JiraColumn> jiraColumns = new List<JiraColumn>();
         private List<JiraWorkRateData> jiraWorkRateDatas = new List<JiraWorkRateData>();
         private string JSON = "";
+        private string separator = "____________________________________________________________________________";
         private enum JSONLocation
         {
             FilePath = 0,
@@ -26,7 +27,7 @@ namespace MetrixExtract
         }
         private void SpitOutColumnValues(string header)
         {
-            string output = header + Environment.NewLine + "______________________________________" + Environment.NewLine + Environment.NewLine;
+            string output = header + Environment.NewLine + separator + Environment.NewLine + Environment.NewLine;
             foreach (JiraColumn thing in jiraColumns)
             {
                 output += "Index:\t" + thing.Index + Environment.NewLine
@@ -36,18 +37,17 @@ namespace MetrixExtract
             }
             TxtColumns.Text = output;
         }
-        private void SpitOutWorkRateValues(string header)
+        private void SpitOutWorkRateValues()
         {
-            string output = header + Environment.NewLine;
-            output += "______________________________________" + Environment.NewLine + Environment.NewLine;
+            string output = "All Work Rate Values:" + Environment.NewLine + separator + Environment.NewLine + Environment.NewLine;
             foreach (JiraWorkRateData thing in jiraWorkRateDatas)
             {
-                output += "Index: " + thing.Index
-                + "\tRate Start: " + thing.RateStart + " - " + thing.GetRateStartDateAsString() + Environment.NewLine
-                + "\tRate End: " + thing.RateEnd + " - " + thing.GetRateEndDateAsString() + Environment.NewLine
-                + "\tRate: " + thing.Rate + Environment.NewLine
-                + "\tSystem Calculated Rate: " + thing.GetCalculatedRate + Environment.NewLine
-                + "\tSystem Calc. Rate Str: " + thing.GetCalculatedRateAsString + Environment.NewLine 
+                output += "Index: " + thing.Index + Environment.NewLine
+                + "\t\tRate Start:\t\t" + thing.RateStart + " - " + thing.GetRateStartDateAsString() + Environment.NewLine
+                + "\t\tRate End:\t\t" + thing.RateEnd + " - " + thing.GetRateEndDateAsString() + Environment.NewLine
+                + "\t\tRate:\t\t\t" + thing.Rate + Environment.NewLine
+                + "\t\tSystem Calculated Rate:\t" + thing.GetCalculatedRate + Environment.NewLine
+                + "\t\tSystem Calc. Rate Str:\t" + thing.GetCalculatedRateAsString + Environment.NewLine 
                 + Environment.NewLine;
             }
             TxtWorkRates.Text = output;
@@ -63,12 +63,12 @@ namespace MetrixExtract
                     + "Swimlane ID: " + thing.SwimLaneID + Environment.NewLine;
                 for (int i = 0; i < thing.WorkingTime.Length && i < thing.LeaveTime.Length && i < thing.TotalTime.Length; i++)
                 {
-                    output += "Column: " + jiraColumns[i].Name + Environment.NewLine
-                        + "\tLeave Time:\t" + MetrixSharedCode.GetDateStringFromTimeStamp(thing.LeaveTime[i]) + " (" + thing.LeaveTime[i] + ")" + Environment.NewLine
-                        + "\tWorking Time:\t" + thing.WorkingTimeAsStringByColumn(i) + " (" + thing.WorkingTime[i] + ")" + Environment.NewLine
-                        + "\tTotal Time:\t" + thing.TotalTimeAsStringByColumn(i) + " (" + thing.TotalTime[i] + ")" + Environment.NewLine;
+                    output += Environment.NewLine + "Column: " + jiraColumns[i].Name + Environment.NewLine
+                        + "\t\tLeave Time:\t" + MetrixSharedCode.GetDateStringFromTimeStamp(thing.LeaveTime[i]) + " (" + thing.LeaveTime[i] + ")" + Environment.NewLine
+                        + "\t\tWorking Time:\t" + thing.WorkingTimeAsStringByColumn(i) + " (" + thing.WorkingTime[i] + ")" + Environment.NewLine
+                        + "\t\tTotal Time:\t" + thing.TotalTimeAsStringByColumn(i) + " (" + thing.TotalTime[i] + ")" + Environment.NewLine;
                 }
-                output += "______________________________________" + Environment.NewLine + Environment.NewLine;
+                output += separator + Environment.NewLine + Environment.NewLine;
                 }
             TxtIssues.Text = output;
         }
@@ -221,7 +221,7 @@ namespace MetrixExtract
                                         break;
                                 }
                             }
-                            SpitOutWorkRateValues("After All Values:");
+                            SpitOutWorkRateValues();
                             SpitOutIssueValues();
                             break;
                     }
@@ -247,22 +247,19 @@ namespace MetrixExtract
                         jiraIssueCount++;
                         totalTime += tempTotalTime;
                         workingTime += tempWorkingTime;
-                        output += jiraIssue.Key + ": "
-                            + "\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempWorkingTime) + " (W)" + Environment.NewLine
-                            + "\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempTotalTime) + " (T)"
-                            + Environment.NewLine + Environment.NewLine;
+                        output += jiraIssue.Key + ": " + Environment.NewLine
+                            + "\t\tWorking:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempWorkingTime) + Environment.NewLine
+                            + "\t\tTotal:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempTotalTime) + Environment.NewLine + Environment.NewLine;
                     }
                 }
                 if (jiraIssueCount > 0)
                 {
                     output = "Total issues in JSON: " + jiraIssues.Count + Environment.NewLine
                         + "Average of " + jiraIssueCount + " Items: " + Environment.NewLine
-                        + "\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(workingTime / jiraIssueCount) + " (W)" + Environment.NewLine
-                        + "\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(totalTime / jiraIssueCount) + " (T)"
-                        + Environment.NewLine + "________________________________________"
-                        + Environment.NewLine + Environment.NewLine
-                        + output;
-                    TxtAverage.Text = output;
+                        + "\t\tWorking:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(workingTime / jiraIssueCount) + Environment.NewLine
+                        + "\t\tTotal:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(totalTime / jiraIssueCount) + Environment.NewLine 
+                        + Environment.NewLine + output;
+                    TxtAverage.Text = "All Averages:" + Environment.NewLine + separator + Environment.NewLine + Environment.NewLine + output;
                 } else
                 {
                     TxtAverage.Text = "Nothing to Average!";
