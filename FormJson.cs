@@ -18,7 +18,15 @@ namespace MetrixExtract
         private List<JiraColumn> jiraColumns = new List<JiraColumn>();
         private List<JiraWorkRateData> jiraWorkRateDatas = new List<JiraWorkRateData>();
         private string JSON = "";
-        private string separator = "____________________________________________________________________________";
+        private long averageWorkingTime;
+        private long medianWorkingTime;
+        private long averageTotalTime;
+        private long medianTotalTime;
+        private long minWorkingTime;
+        private long maxWorkingTime;
+        private long minTotalTime;
+        private long maxTotalTime;
+        private readonly string separator = "____________________________________________________________________________";
         private enum JSONLocation
         {
             FilePath = 0,
@@ -226,11 +234,11 @@ namespace MetrixExtract
                             break;
                     }
                 }
-                CalculateAverageCycleTime();
+                CalculateCycleTimes();
             }
             this.Cursor = Cursors.Default;
         }
-        private void CalculateAverageCycleTime()
+        private void CalculateCycleTimes()
         {
             string output = "";
             long totalTime = 0;
@@ -240,8 +248,8 @@ namespace MetrixExtract
             {
                 foreach (JiraIssue jiraIssue in jiraIssues)
                 {
-                    long tempTotalTime = jiraIssue.GetTotalTimeByColumn(1);
-                    long tempWorkingTime = jiraIssue.GetWorkingTimeByColumn(1);
+                    long tempTotalTime = jiraIssue.GetTotalTimeByColumn(MetrixSharedCode.inProgressColumn);
+                    long tempWorkingTime = jiraIssue.GetWorkingTimeByColumn(MetrixSharedCode.inProgressColumn);
                     if ((tempTotalTime >= 0 || tempWorkingTime >= 0) && jiraIssue.LeaveTime[2] >= 0)
                     {
                         jiraIssueCount++;
@@ -254,10 +262,34 @@ namespace MetrixExtract
                 }
                 if (jiraIssueCount > 0)
                 {
-                    output = "Total issues in JSON: " + jiraIssues.Count + Environment.NewLine
-                        + "Average of " + jiraIssueCount + " Items: " + Environment.NewLine
-                        + "\t\tWorking:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(workingTime / jiraIssueCount) + Environment.NewLine
-                        + "\t\tTotal:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(totalTime / jiraIssueCount) + Environment.NewLine 
+                    long[] workingTimeValues = new long[jiraIssues.Count];
+                    long[] totalTimeValues = new long[jiraIssues.Count];
+                    for (int i=0; i<jiraIssueCount; i++)
+                    {
+                        workingTimeValues[i] = jiraIssues[i].WorkingTime[MetrixSharedCode.inProgressColumn];
+                        totalTimeValues[i] = jiraIssues[i].TotalTime[MetrixSharedCode.inProgressColumn];
+                    }
+                    Array.Sort(workingTimeValues);
+                    Array.Sort(totalTimeValues);
+                    medianWorkingTime = workingTimeValues[(int)Math.Round(((double)workingTimeValues.Count() + 1) / 2) - 1];
+                    medianTotalTime = totalTimeValues[(int)Math.Round(((double)totalTimeValues.Count() + 1) / 2) - 1];
+
+                    minWorkingTime = workingTimeValues[0];
+                    maxWorkingTime = workingTimeValues[workingTimeValues.Count()-1];
+                    minTotalTime = totalTimeValues[0];
+                    maxTotalTime = totalTimeValues[totalTimeValues.Count() - 1];
+
+                    averageWorkingTime = workingTime / jiraIssueCount;
+                    averageTotalTime = totalTime / jiraIssueCount;
+                    output = "Issues: " + jiraIssueCount + " of " + jiraIssues.Count + " Items" + Environment.NewLine + Environment.NewLine
+                        + "\t\tWork Time Avg:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(averageWorkingTime) + Environment.NewLine
+                        + "\t\tMedian Work Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(medianWorkingTime) + Environment.NewLine
+                        + "\t\tMin Work Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(minWorkingTime) + Environment.NewLine
+                        + "\t\tMax Work Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(maxWorkingTime) + Environment.NewLine
+                        + "\t\tTotal Time Avg:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(averageTotalTime) + Environment.NewLine
+                        + "\t\tMedian Total Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(medianTotalTime) + Environment.NewLine
+                        + "\t\tMin Total Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(minTotalTime) + Environment.NewLine
+                        + "\t\tMax Total Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(maxTotalTime) + Environment.NewLine
                         + Environment.NewLine + output;
                     TxtAverage.Text = "All Averages:" + Environment.NewLine + separator + Environment.NewLine + Environment.NewLine + output;
                 } else

@@ -16,7 +16,7 @@ public static class MetrixSharedCode
     private static string jqlQuery = "project = outrunthezombies";
     private static int itemsPerPage = 100;
     private static int itemStart = 0;
-
+    public static int inProgressColumn = 1;
     private static readonly string sConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source =C:\\Users\\Greg\\source\\repos\\Metrixfest\\Metrixfest\\metrixfest.mdb;Persist Security Info=False;";
 
     public static OleDbConnection oOleDbConnection;
