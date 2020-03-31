@@ -55,7 +55,7 @@ namespace MetrixExtract
                 + "\t\tRate End:\t\t" + thing.RateEnd + " - " + thing.GetRateEndDateAsString() + Environment.NewLine
                 + "\t\tRate:\t\t\t" + thing.Rate + Environment.NewLine
                 + "\t\tSystem Calculated Rate:\t" + thing.GetCalculatedRate + Environment.NewLine
-                + "\t\tSystem Calc. Rate Str:\t" + thing.GetCalculatedRateAsString + Environment.NewLine 
+                + "\t\tSystem Calc. Rate Str:\t" + thing.GetCalculatedRateAsString + Environment.NewLine
                 + Environment.NewLine;
             }
             TxtWorkRates.Text = output;
@@ -77,7 +77,7 @@ namespace MetrixExtract
                         + "\t\tTotal Time:\t" + thing.TotalTimeAsStringByColumn(i) + " (" + thing.TotalTime[i] + ")" + Environment.NewLine;
                 }
                 output += separator + Environment.NewLine + Environment.NewLine;
-                }
+            }
             TxtIssues.Text = output;
         }
         private long[] CreateTimeArray(JProperty values)
@@ -94,7 +94,7 @@ namespace MetrixExtract
             }
             return totalTimes;
         }
-        private void BuildJiraIssuesAndColumnsFromJson(JSONLocation location =  JSONLocation.TextBox)
+        private void BuildJiraIssuesAndColumnsFromJson(JSONLocation location = JSONLocation.TextBox)
         {
             this.Cursor = Cursors.WaitCursor;
             string jsonText = TxtJson.Text;
@@ -109,16 +109,17 @@ namespace MetrixExtract
                     jsonText = MetrixSharedCode.json;
                     break;
             }
-            JObject json = JObject.Parse(jsonText);
-            List<JToken> data = json.Children().ToList();
-            jiraIssues.Clear();
-            jiraColumns.Clear();
-            jiraWorkRateDatas.Clear();
 
             if (jsonText == "")
             {
                 TxtAverage.Text = "Nothing to parse!";
-            }  else {
+            } else {
+                JObject json = JObject.Parse(jsonText);
+                List<JToken> data = json.Children().ToList();
+                jiraIssues.Clear();
+                jiraColumns.Clear();
+                jiraWorkRateDatas.Clear();
+
                 foreach (JProperty item in data)
                 {
                     item.CreateReader();
@@ -195,7 +196,7 @@ namespace MetrixExtract
                                 switch (workRate.Name)
                                 {
                                     case "timezone":
-                                        //MessageBox.Show(workRate.Value); //Time zone value
+                                        // Ignore Time zone value...for now...
                                         break;
                                     case "rates":
                                         List<JToken> rates = workRate.Children().Children().ToList();
@@ -244,38 +245,37 @@ namespace MetrixExtract
             long totalTime = 0;
             long workingTime = 0;
             int jiraIssueCount = 0;
+            long[] workingTimeValues = new long[0];
+            long[] totalTimeValues = new long[0];
             if (jiraIssues.Count > 0)
             {
-                foreach (JiraIssue jiraIssue in jiraIssues)
+                for (int i=0; i<jiraIssues.Count; i++)
                 {
-                    long tempTotalTime = jiraIssue.GetTotalTimeByColumn(MetrixSharedCode.inProgressColumn);
-                    long tempWorkingTime = jiraIssue.GetWorkingTimeByColumn(MetrixSharedCode.inProgressColumn);
-                    if ((tempTotalTime >= 0 || tempWorkingTime >= 0) && jiraIssue.LeaveTime[2] >= 0)
+                    long tempTotalTime = jiraIssues[i].GetTotalTimeByColumn(MetrixSharedCode.inProgressColumn);
+                    long tempWorkingTime = jiraIssues[i].GetWorkingTimeByColumn(MetrixSharedCode.inProgressColumn);
+                    if ((tempTotalTime >= 0 || tempWorkingTime >= 0) && jiraIssues[i].LeaveTime[MetrixSharedCode.doneColumn] >= 0)
                     {
-                        jiraIssueCount++;
                         totalTime += tempTotalTime;
+                        Array.Resize(ref workingTimeValues, jiraIssueCount);
+                        Array.Resize(ref totalTimeValues, jiraIssueCount);
                         workingTime += tempWorkingTime;
-                        output += jiraIssue.Key + ": " + Environment.NewLine
+                        output += jiraIssues[i].Key + ": " + Environment.NewLine
                             + "\t\tWorking:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempWorkingTime) + Environment.NewLine
                             + "\t\tTotal:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempTotalTime) + Environment.NewLine + Environment.NewLine;
+                        workingTimeValues[jiraIssueCount] = jiraIssues[i].WorkingTime[MetrixSharedCode.inProgressColumn];
+                        totalTimeValues[jiraIssueCount] = jiraIssues[i].TotalTime[MetrixSharedCode.inProgressColumn];
+                        jiraIssueCount++;
                     }
                 }
                 if (jiraIssueCount > 0)
                 {
-                    long[] workingTimeValues = new long[jiraIssues.Count];
-                    long[] totalTimeValues = new long[jiraIssues.Count];
-                    for (int i=0; i<jiraIssueCount; i++)
-                    {
-                        workingTimeValues[i] = jiraIssues[i].WorkingTime[MetrixSharedCode.inProgressColumn];
-                        totalTimeValues[i] = jiraIssues[i].TotalTime[MetrixSharedCode.inProgressColumn];
-                    }
                     Array.Sort(workingTimeValues);
                     Array.Sort(totalTimeValues);
                     medianWorkingTime = workingTimeValues[(int)Math.Round(((double)workingTimeValues.Count() + 1) / 2) - 1];
                     medianTotalTime = totalTimeValues[(int)Math.Round(((double)totalTimeValues.Count() + 1) / 2) - 1];
 
                     minWorkingTime = workingTimeValues[0];
-                    maxWorkingTime = workingTimeValues[workingTimeValues.Count()-1];
+                    maxWorkingTime = workingTimeValues[workingTimeValues.Count() - 1];
                     minTotalTime = totalTimeValues[0];
                     maxTotalTime = totalTimeValues[totalTimeValues.Count() - 1];
 
@@ -286,17 +286,90 @@ namespace MetrixExtract
                         + "\t\tMedian Work Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(medianWorkingTime) + Environment.NewLine
                         + "\t\tMin Work Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(minWorkingTime) + Environment.NewLine
                         + "\t\tMax Work Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(maxWorkingTime) + Environment.NewLine
+                        + Environment.NewLine
                         + "\t\tTotal Time Avg:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(averageTotalTime) + Environment.NewLine
                         + "\t\tMedian Total Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(medianTotalTime) + Environment.NewLine
                         + "\t\tMin Total Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(minTotalTime) + Environment.NewLine
                         + "\t\tMax Total Time:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(maxTotalTime) + Environment.NewLine
                         + Environment.NewLine + output;
                     TxtAverage.Text = "All Averages:" + Environment.NewLine + separator + Environment.NewLine + Environment.NewLine + output;
-                } else
+                }
+                else
                 {
                     TxtAverage.Text = "Nothing to Average!";
                 }
             }
+        }
+        private void GetBoardsAvailableFromJSON()
+        {
+            string jsonText = TxtBoards.Text;
+            CboBoards.Items.Clear();
+            if (jsonText == "")
+            {
+                CboBoards.Items.Add("Nothing to parse!");
+            } else {
+                JObject json = JObject.Parse(jsonText);
+                List<JToken> data = json.Children().ToList();
+                jiraBoards.Clear();
+
+                foreach (JProperty item in data)
+                {
+                    item.CreateReader();
+                    switch (item.Name)
+                    {
+                        case "maxResults":
+                            break;
+                        case "startAt":
+                            break;
+                        case "total":
+                            break;
+                        case "isLast":
+                            break;
+                        case "values":
+                            List<JToken> values = item.Children().Children().ToList();
+                            foreach (JObject value in values)
+                            {
+                                value.CreateReader();
+                                List<JToken> boards = value.Children().ToList();
+                                JiraBoard newJiraBoard = new JiraBoard();
+
+                                foreach (JProperty board in boards)
+                                {
+                                    value.CreateReader();
+                                    switch (board.Name)
+                                    {
+                                        case "id":
+                                            newJiraBoard.RapidViewID = (int)board.Value;
+                                            break;
+                                        case "name":
+                                            newJiraBoard.ProjectName = (string)board.Value;
+                                            break;
+                                        case "location":
+                                            List<JToken> details = board.Children().Children().ToList();
+                                            foreach (JProperty detail in details)
+                                            {
+                                                detail.CreateReader();
+                                                switch (detail.Name)
+                                                {
+                                                    case "projectId":
+                                                        newJiraBoard.ProjectID = (int)detail.Value;
+                                                        break;
+                                                    case "projectKey":
+                                                        newJiraBoard.ProjectKey = (string)detail.Value;
+                                                        break;
+                                                }
+                                            }
+                                            break;
+                                    }
+                                }
+                                jiraBoards.Add(newJiraBoard);
+                                CboBoards.Items.Add(newJiraBoard.ProjectName);
+                            }
+                            break;
+                    }
+                }
+            }
+            CboBoards.SelectedIndex = 0;
         }
         private void BtnLoadJSON_Click(object sender, EventArgs e)
         {
@@ -311,6 +384,10 @@ namespace MetrixExtract
         private void BtnParseFromTextBox_Click(object sender, EventArgs e)
         {
             BuildJiraIssuesAndColumnsFromJson();
+        }
+        private void BtnGetBoards_Click(object sender, EventArgs e)
+        {
+            GetBoardsAvailableFromJSON();
         }
     }
 }

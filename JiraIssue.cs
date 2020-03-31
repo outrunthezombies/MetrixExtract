@@ -4,6 +4,8 @@ namespace MetrixExtract
 {
     class JiraIssue
     {
+        /* URL to API: https://outrunthezombies.atlassian.net/rest/greenhopper/latest/rapid/charts/controlchart?rapidViewId=6&swimlaneId=10&swimlaneId=11&quickFilterId=14 */
+
         private string issueKey;
         private string issueSummary;
         private string issueSwimLaneId;

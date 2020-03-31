@@ -2,6 +2,8 @@
 {
     class JiraColumn
     {
+        /* URL to API: https://outrunthezombies.atlassian.net/rest/greenhopper/latest/rapid/charts/controlchart?rapidViewId=6&swimlaneId=10&swimlaneId=11&quickFilterId=14 */
+
         private int indexID;
         public int Index
         {
