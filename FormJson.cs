@@ -17,6 +17,7 @@ namespace MetrixExtract
         private List<JiraIssue> jiraIssues = new List<JiraIssue>();
         private List<JiraColumn> jiraColumns = new List<JiraColumn>();
         private List<JiraWorkRateData> jiraWorkRateDatas = new List<JiraWorkRateData>();
+        private List<JiraBoard> jiraBoards = new List<JiraBoard>();
         private string JSON = "";
         private long averageWorkingTime;
         private long medianWorkingTime;
