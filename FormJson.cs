@@ -256,6 +256,7 @@ namespace MetrixExtract
                     long tempWorkingTime = jiraIssues[i].GetWorkingTimeByColumn(MetrixSharedCode.inProgressColumn);
                     if ((tempTotalTime >= 0 || tempWorkingTime >= 0) && jiraIssues[i].LeaveTime[MetrixSharedCode.doneColumn] >= 0)
                     {
+                        jiraIssueCount++;
                         totalTime += tempTotalTime;
                         Array.Resize(ref workingTimeValues, jiraIssueCount);
                         Array.Resize(ref totalTimeValues, jiraIssueCount);
@@ -263,9 +264,8 @@ namespace MetrixExtract
                         output += jiraIssues[i].Key + ": " + Environment.NewLine
                             + "\t\tWorking:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempWorkingTime) + Environment.NewLine
                             + "\t\tTotal:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempTotalTime) + Environment.NewLine + Environment.NewLine;
-                        workingTimeValues[jiraIssueCount] = jiraIssues[i].WorkingTime[MetrixSharedCode.inProgressColumn];
-                        totalTimeValues[jiraIssueCount] = jiraIssues[i].TotalTime[MetrixSharedCode.inProgressColumn];
-                        jiraIssueCount++;
+                        workingTimeValues[jiraIssueCount-1] = jiraIssues[i].WorkingTime[MetrixSharedCode.inProgressColumn];
+                        totalTimeValues[jiraIssueCount-1] = jiraIssues[i].TotalTime[MetrixSharedCode.inProgressColumn];
                     }
                 }
                 if (jiraIssueCount > 0)
