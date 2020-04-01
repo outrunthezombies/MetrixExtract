@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JiraFilter.cs" />
     <Compile Include="JiraBoard.cs" />
     <Compile Include="JiraWorkRateData.cs" />
     <Compile Include="FormStart.cs">

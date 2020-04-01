@@ -18,6 +18,7 @@ namespace MetrixExtract
         private List<JiraColumn> jiraColumns = new List<JiraColumn>();
         private List<JiraWorkRateData> jiraWorkRateDatas = new List<JiraWorkRateData>();
         private List<JiraBoard> jiraBoards = new List<JiraBoard>();
+        private List<JiraFilter> jiraFilters = new List<JiraFilter>();
         private string JSON = "";
         private long averageWorkingTime;
         private long medianWorkingTime;
@@ -84,6 +85,44 @@ namespace MetrixExtract
                 output += separator + Environment.NewLine + Environment.NewLine;
             }
             TxtIssues.Text = output;
+        }
+        private void SpitOutBoardValues()
+        {
+            string output = "All Board Values:" + Environment.NewLine + separator + Environment.NewLine + Environment.NewLine;
+
+            foreach (JiraBoard thing in jiraBoards)
+            {
+                output += "Board ID:\t\t" + thing.RapidViewID + Environment.NewLine
+                + "Name:\t\t" + thing.Name + Environment.NewLine
+                + "Proj ID:\t\t" + thing.ProjectID + Environment.NewLine
+                + "Proj Name:\t" + thing.ProjectName + Environment.NewLine
+                + "Proj Key:\t\t" + thing.ProjectKey + Environment.NewLine
+                + "Proj Type:\t" + thing.Type + Environment.NewLine
+                + separator + Environment.NewLine + Environment.NewLine;
+
+                CboBoards.Items.Add(thing.ProjectName);
+                CboBoards.SelectedIndex = 0;
+            }
+            TxtBoardData.Text = output;
+        }
+        private void SpitOutFilterValues()
+        {
+            string output = "All Filter Values:" + Environment.NewLine + separator + Environment.NewLine + Environment.NewLine;
+
+            foreach (JiraFilter thing in jiraFilters)
+            {
+                output += "Filter ID:\t\t" + thing.ID + Environment.NewLine
+                + "Board ID:\t\t" + thing.BoardID + Environment.NewLine
+                + "Name:\t\t" + thing.Name + Environment.NewLine
+                + "Description:\t" + thing.Description + Environment.NewLine
+                + "JQL:\t\t" + thing.JQL + Environment.NewLine
+                + "Position:\t\t" + thing.Position + Environment.NewLine
+                + separator + Environment.NewLine + Environment.NewLine;
+
+                CboFilters.Items.Add(thing.Name);
+                CboFilters.SelectedIndex = 0;
+            }
+            TxtFilterData.Text = output;
         }
         private long[] CreateTimeArray(JProperty values)
         {
@@ -347,7 +386,10 @@ namespace MetrixExtract
                                             newJiraBoard.RapidViewID = (int)board.Value;
                                             break;
                                         case "name":
-                                            newJiraBoard.ProjectName = (string)board.Value;
+                                            newJiraBoard.Name = (string)board.Value;
+                                            break;
+                                        case "type":
+                                            newJiraBoard.Type = (string)board.Value;
                                             break;
                                         case "location":
                                             List<JToken> details = board.Children().Children().ToList();
@@ -362,19 +404,87 @@ namespace MetrixExtract
                                                     case "projectKey":
                                                         newJiraBoard.ProjectKey = (string)detail.Value;
                                                         break;
+                                                    case "projectName":
+                                                        newJiraBoard.ProjectName = (string)detail.Value;
+                                                        break;
                                                 }
                                             }
                                             break;
                                     }
                                 }
                                 jiraBoards.Add(newJiraBoard);
-                                CboBoards.Items.Add(newJiraBoard.ProjectName);
                             }
                             break;
                     }
                 }
             }
-            CboBoards.SelectedIndex = 0;
+            SpitOutBoardValues();
+        }
+        private void GetFiltersAvailableFromJSON()
+        {
+            string jsonText = TxtFilters.Text;
+            CboFilters.Items.Clear();
+            if (jsonText == "")
+            {
+                CboFilters.Items.Add("Nothing to parse!");
+            } else {
+                JObject json = JObject.Parse(jsonText);
+                List<JToken> data = json.Children().ToList();
+                jiraFilters.Clear();
+
+                foreach (JProperty item in data)
+                {
+                    item.CreateReader();
+                    switch (item.Name)
+                    {
+                        case "maxResults":
+                            break;
+                        case "startAt":
+                            break;
+                        case "total":
+                            break;
+                        case "isLast":
+                            break;
+                        case "values":
+                            List<JToken> values = item.Children().Children().ToList();
+                            foreach (JObject value in values)
+                            {
+                                value.CreateReader();
+                                List<JToken> nodes = value.Children().ToList();
+                                JiraFilter newJiraFilter = new JiraFilter();
+
+                                foreach (JProperty node in nodes)
+                                {
+                                    value.CreateReader();
+                                    switch (node.Name)
+                                    {
+                                        case "id":
+                                            newJiraFilter.ID = (int)node.Value;
+                                            break;
+                                        case "boardId":
+                                            newJiraFilter.BoardID = (int)node.Value;
+                                            break;
+                                        case "name":
+                                            newJiraFilter.Name = (string)node.Value;
+                                            break;
+                                        case "jql":
+                                            newJiraFilter.JQL = (string)node.Value;
+                                            break;
+                                        case "description":
+                                            newJiraFilter.Description = (string)node.Value;
+                                            break;
+                                        case "position":
+                                            newJiraFilter.Position = (int)node.Value;
+                                            break;
+                                    }
+                                }
+                                jiraFilters.Add(newJiraFilter);
+                            }
+                            break;
+                    }
+                }
+            }
+            SpitOutFilterValues();
         }
         private void BtnLoadJSON_Click(object sender, EventArgs e)
         {
@@ -393,6 +503,10 @@ namespace MetrixExtract
         private void BtnGetBoards_Click(object sender, EventArgs e)
         {
             GetBoardsAvailableFromJSON();
+        }
+        private void BtnFilters_Click(object sender, EventArgs e)
+        {
+            GetFiltersAvailableFromJSON();
         }
     }
 }

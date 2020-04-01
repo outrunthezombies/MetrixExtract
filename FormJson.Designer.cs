@@ -50,6 +50,12 @@
             this.LblColumns = new System.Windows.Forms.Label();
             this.CboFilters = new System.Windows.Forms.ComboBox();
             this.BtnFilters = new System.Windows.Forms.Button();
+            this.TxtFilters = new System.Windows.Forms.TextBox();
+            this.LblFilterJSON = new System.Windows.Forms.Label();
+            this.LblBoardData = new System.Windows.Forms.Label();
+            this.TxtBoardData = new System.Windows.Forms.TextBox();
+            this.LblFilterData = new System.Windows.Forms.Label();
+            this.TxtFilterData = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // TxtIssues
@@ -67,7 +73,7 @@
             this.TxtWorkRates.Multiline = true;
             this.TxtWorkRates.Name = "TxtWorkRates";
             this.TxtWorkRates.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtWorkRates.Size = new System.Drawing.Size(484, 115);
+            this.TxtWorkRates.Size = new System.Drawing.Size(484, 73);
             this.TxtWorkRates.TabIndex = 6;
             // 
             // BtnParseFromTextBox
@@ -231,7 +237,7 @@
             // CboFilters
             // 
             this.CboFilters.FormattingEnabled = true;
-            this.CboFilters.Location = new System.Drawing.Point(582, 160);
+            this.CboFilters.Location = new System.Drawing.Point(586, 336);
             this.CboFilters.MaxDropDownItems = 50;
             this.CboFilters.Name = "CboFilters";
             this.CboFilters.Size = new System.Drawing.Size(214, 21);
@@ -239,18 +245,80 @@
             // 
             // BtnFilters
             // 
-            this.BtnFilters.Location = new System.Drawing.Point(502, 158);
+            this.BtnFilters.Location = new System.Drawing.Point(506, 334);
             this.BtnFilters.Name = "BtnFilters";
             this.BtnFilters.Size = new System.Drawing.Size(74, 23);
             this.BtnFilters.TabIndex = 24;
             this.BtnFilters.Text = "Get Filters";
             this.BtnFilters.UseVisualStyleBackColor = true;
+            this.BtnFilters.Click += new System.EventHandler(this.BtnFilters_Click);
+            // 
+            // TxtFilters
+            // 
+            this.TxtFilters.Location = new System.Drawing.Point(506, 376);
+            this.TxtFilters.Multiline = true;
+            this.TxtFilters.Name = "TxtFilters";
+            this.TxtFilters.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtFilters.Size = new System.Drawing.Size(479, 59);
+            this.TxtFilters.TabIndex = 26;
+            this.TxtFilters.Text = resources.GetString("TxtFilters.Text");
+            // 
+            // LblFilterJSON
+            // 
+            this.LblFilterJSON.AutoSize = true;
+            this.LblFilterJSON.Location = new System.Drawing.Point(506, 360);
+            this.LblFilterJSON.Name = "LblFilterJSON";
+            this.LblFilterJSON.Size = new System.Drawing.Size(63, 13);
+            this.LblFilterJSON.TabIndex = 27;
+            this.LblFilterJSON.Text = "Filter JSON:";
+            // 
+            // LblBoardData
+            // 
+            this.LblBoardData.AutoSize = true;
+            this.LblBoardData.Location = new System.Drawing.Point(502, 144);
+            this.LblBoardData.Name = "LblBoardData";
+            this.LblBoardData.Size = new System.Drawing.Size(64, 13);
+            this.LblBoardData.TabIndex = 29;
+            this.LblBoardData.Text = "Board Data:";
+            // 
+            // TxtBoardData
+            // 
+            this.TxtBoardData.Location = new System.Drawing.Point(505, 160);
+            this.TxtBoardData.Multiline = true;
+            this.TxtBoardData.Name = "TxtBoardData";
+            this.TxtBoardData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtBoardData.Size = new System.Drawing.Size(480, 168);
+            this.TxtBoardData.TabIndex = 28;
+            // 
+            // LblFilterData
+            // 
+            this.LblFilterData.AutoSize = true;
+            this.LblFilterData.Location = new System.Drawing.Point(502, 438);
+            this.LblFilterData.Name = "LblFilterData";
+            this.LblFilterData.Size = new System.Drawing.Size(58, 13);
+            this.LblFilterData.TabIndex = 31;
+            this.LblFilterData.Text = "Filter Data:";
+            // 
+            // TxtFilterData
+            // 
+            this.TxtFilterData.Location = new System.Drawing.Point(505, 454);
+            this.TxtFilterData.Multiline = true;
+            this.TxtFilterData.Name = "TxtFilterData";
+            this.TxtFilterData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtFilterData.Size = new System.Drawing.Size(480, 188);
+            this.TxtFilterData.TabIndex = 30;
             // 
             // FormJson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 690);
+            this.ClientSize = new System.Drawing.Size(997, 653);
+            this.Controls.Add(this.LblFilterData);
+            this.Controls.Add(this.TxtFilterData);
+            this.Controls.Add(this.LblBoardData);
+            this.Controls.Add(this.TxtBoardData);
+            this.Controls.Add(this.LblFilterJSON);
+            this.Controls.Add(this.TxtFilters);
             this.Controls.Add(this.CboFilters);
             this.Controls.Add(this.BtnFilters);
             this.Controls.Add(this.LblColumns);
@@ -302,5 +370,11 @@
         private System.Windows.Forms.Label LblColumns;
         private System.Windows.Forms.ComboBox CboFilters;
         private System.Windows.Forms.Button BtnFilters;
+        internal System.Windows.Forms.TextBox TxtFilters;
+        private System.Windows.Forms.Label LblFilterJSON;
+        private System.Windows.Forms.Label LblBoardData;
+        internal System.Windows.Forms.TextBox TxtBoardData;
+        private System.Windows.Forms.Label LblFilterData;
+        internal System.Windows.Forms.TextBox TxtFilterData;
     }
 }

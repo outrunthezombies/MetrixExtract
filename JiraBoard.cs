@@ -14,6 +14,7 @@ namespace MetrixExtract
         private int projectID;
         private string projectKey;
         private string projectName;
+        private string boardName;
         private string boardType;
 
         public int RapidViewID
@@ -31,15 +32,26 @@ namespace MetrixExtract
             get => projectKey;
             set => projectKey = value;
         }
+        public string Name
+        {
+            get => boardName;
+            set => boardName = value;
+        }
         public string ProjectName
         {
             get => projectName;
             set => projectName = value;
         }
-        public string BoardType
+        public string Type
         {
             get => boardType;
             set => boardType = value;
+        }
+        private List<JiraFilter> filter;
+        public List<JiraFilter> Filters
+        {
+            get => filter;
+            set => filter = value;
         }
     }
 }
