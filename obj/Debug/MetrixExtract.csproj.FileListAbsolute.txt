@@ -16,5 +16,4 @@ C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.F
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\bin\Debug\Atlassian.Jira.dll
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\bin\Debug\RestSharp.dll
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\bin\Debug\RestSharp.xml
-C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.FormStart.resources
 C:\Users\Greg\source\repos\MetrixExtract\MetrixExtract\obj\Debug\MetrixExtract.FormManualData.resources

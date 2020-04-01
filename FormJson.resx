@@ -126,4 +126,13 @@
   <data name="TxtFilters.Text" xml:space="preserve">
     <value>{"maxResults":50,"startAt":0,"total":4,"isLast":true,"values":[{"id":11,"boardId":6,"name":"Only My Issues","jql":"assignee = currentUser()","description":"Displays issues which are currently assigned to the current user","position":0},{"id":12,"boardId":6,"name":"Recently Updated","jql":"updatedDate &gt;= -1d","description":"Displays issues which have been updated in the last day","position":1},{"id":13,"boardId":6,"name":"Stories Only","jql":"issuetype = Story","description":"Stories Only","position":2},{"id":14,"boardId":6,"name":"Closed Items in last Day","jql":"resolutiondate &gt; endOfDay(-14)","description":"","position":3}]}</value>
   </data>
+  <metadata name="MnuView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="MnuView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>52</value>
+  </metadata>
 </root>

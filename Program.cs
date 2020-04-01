@@ -13,7 +13,7 @@ namespace MetrixExtract
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormStart());
+            Application.Run(new FormJson());
         }
     }
 }

@@ -508,5 +508,16 @@ namespace MetrixExtract
         {
             GetFiltersAvailableFromJSON();
         }
+
+        private void ManualEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormManualData frmManualData = new FormManualData();
+            frmManualData.Show();
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
