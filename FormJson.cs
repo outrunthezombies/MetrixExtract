@@ -52,10 +52,9 @@ namespace MetrixExtract
             foreach (JiraWorkRateData thing in jiraWorkRateDatas)
             {
                 output += "Index: " + thing.Index + Environment.NewLine
-                + "\t\tRate Start:\t\t" + thing.RateStart + " - " + thing.GetRateStartDateAsString() + Environment.NewLine
-                + "\t\tRate End:\t\t" + thing.RateEnd + " - " + thing.GetRateEndDateAsString() + Environment.NewLine
+                + "\t\tRate Start:\t\t" + thing.GetRateStartDateAsString() + Environment.NewLine
+                + "\t\tRate End:\t\t" + thing.GetRateEndDateAsString() + Environment.NewLine
                 + "\t\tRate:\t\t\t" + thing.Rate + Environment.NewLine
-                + "\t\tSystem Calculated Rate:\t" + thing.GetCalculatedRate + Environment.NewLine
                 + "\t\tSystem Calc. Rate Str:\t" + thing.GetCalculatedRateAsString + Environment.NewLine
                 + Environment.NewLine;
             }
@@ -72,10 +71,15 @@ namespace MetrixExtract
                     + "Swimlane ID: " + thing.SwimLaneID + Environment.NewLine;
                 for (int i = 0; i < thing.WorkingTime.Length && i < thing.LeaveTime.Length && i < thing.TotalTime.Length; i++)
                 {
-                    output += Environment.NewLine + "Column: " + jiraColumns[i].Name + Environment.NewLine
-                        + "\t\tLeave Time:\t" + MetrixSharedCode.GetDateStringFromTimeStamp(thing.LeaveTime[i]) + " (" + thing.LeaveTime[i] + ")" + Environment.NewLine
-                        + "\t\tWorking Time:\t" + thing.WorkingTimeAsStringByColumn(i) + " (" + thing.WorkingTime[i] + ")" + Environment.NewLine
-                        + "\t\tTotal Time:\t" + thing.TotalTimeAsStringByColumn(i) + " (" + thing.TotalTime[i] + ")" + Environment.NewLine;
+                    output += Environment.NewLine + "Column: " + jiraColumns[i].Name + Environment.NewLine + "\t\tLeave Time:\t";
+                    if (thing.LeaveTime[i] < 0)
+                    {
+                        output += "Hasn't left yet!" + Environment.NewLine;
+                    } else {
+                        output += MetrixSharedCode.GetDateStringFromTimeStamp(thing.LeaveTime[i]) + Environment.NewLine;
+                    }
+                    output += "\t\tWorking Time:\t" + thing.WorkingTimeAsStringByColumn(i) + Environment.NewLine
+                        + "\t\tTotal Time:\t" + thing.TotalTimeAsStringByColumn(i) + Environment.NewLine;
                 }
                 output += separator + Environment.NewLine + Environment.NewLine;
             }
