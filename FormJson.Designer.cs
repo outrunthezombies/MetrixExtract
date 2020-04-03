@@ -62,12 +62,14 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CboProjects = new System.Windows.Forms.ComboBox();
             this.BtnProjects = new System.Windows.Forms.Button();
+            this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.BtnFile = new System.Windows.Forms.Button();
             this.MnuView.SuspendLayout();
             this.SuspendLayout();
             // 
             // TxtIssues
             // 
-            this.TxtIssues.Location = new System.Drawing.Point(11, 178);
+            this.TxtIssues.Location = new System.Drawing.Point(11, 202);
             this.TxtIssues.Multiline = true;
             this.TxtIssues.Name = "TxtIssues";
             this.TxtIssues.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -85,7 +87,7 @@
             // 
             // BtnParseFromTextBox
             // 
-            this.BtnParseFromTextBox.Location = new System.Drawing.Point(198, 54);
+            this.BtnParseFromTextBox.Location = new System.Drawing.Point(198, 56);
             this.BtnParseFromTextBox.Name = "BtnParseFromTextBox";
             this.BtnParseFromTextBox.Size = new System.Drawing.Size(93, 23);
             this.BtnParseFromTextBox.TabIndex = 5;
@@ -95,7 +97,7 @@
             // 
             // TxtJson
             // 
-            this.TxtJson.Location = new System.Drawing.Point(12, 83);
+            this.TxtJson.Location = new System.Drawing.Point(11, 107);
             this.TxtJson.Multiline = true;
             this.TxtJson.Name = "TxtJson";
             this.TxtJson.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -114,16 +116,16 @@
             // 
             // TxtAverage
             // 
-            this.TxtAverage.Location = new System.Drawing.Point(11, 286);
+            this.TxtAverage.Location = new System.Drawing.Point(11, 314);
             this.TxtAverage.Multiline = true;
             this.TxtAverage.Name = "TxtAverage";
             this.TxtAverage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtAverage.Size = new System.Drawing.Size(418, 182);
+            this.TxtAverage.Size = new System.Drawing.Size(418, 154);
             this.TxtAverage.TabIndex = 10;
             // 
             // BtnLoadAndParseJSON
             // 
-            this.BtnLoadAndParseJSON.Location = new System.Drawing.Point(264, 28);
+            this.BtnLoadAndParseJSON.Location = new System.Drawing.Point(12, 56);
             this.BtnLoadAndParseJSON.Name = "BtnLoadAndParseJSON";
             this.BtnLoadAndParseJSON.Size = new System.Drawing.Size(165, 23);
             this.BtnLoadAndParseJSON.TabIndex = 11;
@@ -135,7 +137,8 @@
             // 
             this.TxtJSONPath.Location = new System.Drawing.Point(65, 30);
             this.TxtJSONPath.Name = "TxtJSONPath";
-            this.TxtJSONPath.Size = new System.Drawing.Size(193, 20);
+            this.TxtJSONPath.ReadOnly = true;
+            this.TxtJSONPath.Size = new System.Drawing.Size(298, 20);
             this.TxtJSONPath.TabIndex = 12;
             this.TxtJSONPath.Text = "C:\\Users\\Greg\\Desktop\\Delete\\ONJSON.txt";
             // 
@@ -150,7 +153,7 @@
             // 
             // BtnParseFromCoded
             // 
-            this.BtnParseFromCoded.Location = new System.Drawing.Point(304, 54);
+            this.BtnParseFromCoded.Location = new System.Drawing.Point(304, 56);
             this.BtnParseFromCoded.Name = "BtnParseFromCoded";
             this.BtnParseFromCoded.Size = new System.Drawing.Size(125, 23);
             this.BtnParseFromCoded.TabIndex = 14;
@@ -170,6 +173,7 @@
             // 
             // CboBoards
             // 
+            this.CboBoards.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboBoards.FormattingEnabled = true;
             this.CboBoards.Location = new System.Drawing.Point(515, 32);
             this.CboBoards.MaxDropDownItems = 50;
@@ -190,7 +194,7 @@
             // LblCycleTimes
             // 
             this.LblCycleTimes.AutoSize = true;
-            this.LblCycleTimes.Location = new System.Drawing.Point(8, 270);
+            this.LblCycleTimes.Location = new System.Drawing.Point(8, 298);
             this.LblCycleTimes.Name = "LblCycleTimes";
             this.LblCycleTimes.Size = new System.Drawing.Size(67, 13);
             this.LblCycleTimes.TabIndex = 18;
@@ -199,7 +203,7 @@
             // LblJSON
             // 
             this.LblJSON.AutoSize = true;
-            this.LblJSON.Location = new System.Drawing.Point(11, 62);
+            this.LblJSON.Location = new System.Drawing.Point(8, 86);
             this.LblJSON.Name = "LblJSON";
             this.LblJSON.Size = new System.Drawing.Size(83, 13);
             this.LblJSON.TabIndex = 19;
@@ -208,7 +212,7 @@
             // LblIssues
             // 
             this.LblIssues.AutoSize = true;
-            this.LblIssues.Location = new System.Drawing.Point(8, 162);
+            this.LblIssues.Location = new System.Drawing.Point(5, 186);
             this.LblIssues.Name = "LblIssues";
             this.LblIssues.Size = new System.Drawing.Size(94, 13);
             this.LblIssues.TabIndex = 20;
@@ -243,6 +247,7 @@
             // 
             // CboFilters
             // 
+            this.CboFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboFilters.FormattingEnabled = true;
             this.CboFilters.Location = new System.Drawing.Point(519, 354);
             this.CboFilters.MaxDropDownItems = 50;
@@ -338,19 +343,20 @@
             // manualEntryToolStripMenuItem
             // 
             this.manualEntryToolStripMenuItem.Name = "manualEntryToolStripMenuItem";
-            this.manualEntryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manualEntryToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.manualEntryToolStripMenuItem.Text = "Manual Entry";
             this.manualEntryToolStripMenuItem.Click += new System.EventHandler(this.ManualEntryToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // CboProjects
             // 
+            this.CboProjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboProjects.FormattingEnabled = true;
             this.CboProjects.Location = new System.Drawing.Point(725, 32);
             this.CboProjects.MaxDropDownItems = 50;
@@ -368,11 +374,22 @@
             this.BtnProjects.UseVisualStyleBackColor = true;
             this.BtnProjects.Click += new System.EventHandler(this.BtnProjects_Click);
             // 
+            // BtnFile
+            // 
+            this.BtnFile.Location = new System.Drawing.Point(369, 30);
+            this.BtnFile.Name = "BtnFile";
+            this.BtnFile.Size = new System.Drawing.Size(59, 20);
+            this.BtnFile.TabIndex = 35;
+            this.BtnFile.Text = "File";
+            this.BtnFile.UseVisualStyleBackColor = true;
+            this.BtnFile.Click += new System.EventHandler(this.BtnFile_Click);
+            // 
             // FormJson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 670);
+            this.Controls.Add(this.BtnFile);
             this.Controls.Add(this.CboProjects);
             this.Controls.Add(this.BtnProjects);
             this.Controls.Add(this.LblFilterData);
@@ -449,5 +466,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ComboBox CboProjects;
         private System.Windows.Forms.Button BtnProjects;
+        private System.Windows.Forms.OpenFileDialog OpenFileDialog;
+        private System.Windows.Forms.Button BtnFile;
     }
 }

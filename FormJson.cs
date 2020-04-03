@@ -544,5 +544,14 @@ namespace MetrixExtract
             GetProjectsFromJSON();
             CboProjects.SelectedIndex = 0;
         }
+
+        private void BtnFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog.Filter = "JSON files (*.json)|*.json|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            
+            OpenFileDialog.ShowDialog();
+            TxtJSONPath.Text = OpenFileDialog.FileName;
+            
+        }
     }
 }
