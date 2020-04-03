@@ -13,12 +13,12 @@ namespace MetrixExtract
         {
             InitializeComponent();
         }
-
         private List<JiraIssue> jiraIssues = new List<JiraIssue>();
         private List<JiraColumn> jiraColumns = new List<JiraColumn>();
         private List<JiraWorkRateData> jiraWorkRateDatas = new List<JiraWorkRateData>();
         private List<JiraBoard> jiraBoards = new List<JiraBoard>();
         private List<JiraFilter> jiraFilters = new List<JiraFilter>();
+
         private string JSON = "";
         private long averageWorkingTime;
         private long medianWorkingTime;
@@ -28,7 +28,7 @@ namespace MetrixExtract
         private long maxWorkingTime;
         private long minTotalTime;
         private long maxTotalTime;
-        private readonly string separator = "____________________________________________________________________________";
+        private readonly string separator = "______________________________________________________";
         private enum JSONLocation
         {
             FilePath = 0,
@@ -291,24 +291,30 @@ namespace MetrixExtract
             int jiraIssueCount = 0;
             long[] workingTimeValues = new long[0];
             long[] totalTimeValues = new long[0];
+            string[] splitstring = { "-" };
+
             if (jiraIssues.Count > 0)
             {
-                for (int i=0; i<jiraIssues.Count; i++)
+                foreach (JiraIssue issue in jiraIssues)
                 {
-                    long tempTotalTime = jiraIssues[i].GetTotalTimeByColumn(MetrixSharedCode.inProgressColumn);
-                    long tempWorkingTime = jiraIssues[i].GetWorkingTimeByColumn(MetrixSharedCode.inProgressColumn);
-                    if ((tempTotalTime >= 0 || tempWorkingTime >= 0) && jiraIssues[i].LeaveTime[MetrixSharedCode.doneColumn] >= 0)
+                    long tempTotalTime = issue.GetTotalTimeByColumn(MetrixSharedCode.InProgressColumn);
+                    long tempWorkingTime = issue.GetWorkingTimeByColumn(MetrixSharedCode.InProgressColumn);
+                    if ((tempTotalTime >= 0 || tempWorkingTime >= 0) && issue.LeaveTime[MetrixSharedCode.DoneColumn] >= 0)
                     {
-                        jiraIssueCount++;
-                        totalTime += tempTotalTime;
-                        Array.Resize(ref workingTimeValues, jiraIssueCount);
-                        Array.Resize(ref totalTimeValues, jiraIssueCount);
-                        workingTime += tempWorkingTime;
-                        output += jiraIssues[i].Key + ": " + Environment.NewLine
-                            + "\t\tWorking:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempWorkingTime) + Environment.NewLine
-                            + "\t\tTotal:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempTotalTime) + Environment.NewLine + Environment.NewLine;
-                        workingTimeValues[jiraIssueCount-1] = jiraIssues[i].WorkingTime[MetrixSharedCode.inProgressColumn];
-                        totalTimeValues[jiraIssueCount-1] = jiraIssues[i].TotalTime[MetrixSharedCode.inProgressColumn];
+                        string[] projectKey = issue.Key.ToString().Split(splitstring, StringSplitOptions.None);
+                        if (CboProjects.SelectedIndex == 0 || projectKey[0].Equals(CboProjects.SelectedItem.ToString()))
+                        {
+                            jiraIssueCount++;
+                            totalTime += tempTotalTime;
+                            Array.Resize(ref workingTimeValues, jiraIssueCount);
+                            Array.Resize(ref totalTimeValues, jiraIssueCount);
+                            workingTime += tempWorkingTime;
+                            output += issue.Key + ": " + Environment.NewLine
+                                + "\t\tWorking:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempWorkingTime) + Environment.NewLine
+                                + "\t\tTotal:\t" + MetrixSharedCode.GetSystemTimeElapsedAsString(tempTotalTime) + Environment.NewLine + Environment.NewLine;
+                            workingTimeValues[jiraIssueCount - 1] = issue.WorkingTime[MetrixSharedCode.InProgressColumn];
+                            totalTimeValues[jiraIssueCount - 1] = issue.TotalTime[MetrixSharedCode.InProgressColumn];
+                        }
                     }
                 }
                 if (jiraIssueCount > 0)
@@ -518,6 +524,25 @@ namespace MetrixExtract
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void GetProjectsFromJSON()
+        {
+            string[] splitstring = { "-" };
+            CboProjects.Items.Clear();
+            CboProjects.Items.Add("All Projects");
+            foreach (JiraIssue issue in jiraIssues)
+            {
+                string[] values = issue.Key.ToString().Split(splitstring, StringSplitOptions.None);
+                if (!CboProjects.Items.Contains(values[0]))
+                {
+                    CboProjects.Items.Add(values[0]);
+                }
+            }
+        }
+        private void BtnProjects_Click(object sender, EventArgs e)
+        {
+            GetProjectsFromJSON();
+            CboProjects.SelectedIndex = 0;
         }
     }
 }

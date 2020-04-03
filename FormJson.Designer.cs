@@ -60,6 +60,8 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CboProjects = new System.Windows.Forms.ComboBox();
+            this.BtnProjects = new System.Windows.Forms.Button();
             this.MnuView.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +71,7 @@
             this.TxtIssues.Multiline = true;
             this.TxtIssues.Name = "TxtIssues";
             this.TxtIssues.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtIssues.Size = new System.Drawing.Size(484, 92);
+            this.TxtIssues.Size = new System.Drawing.Size(418, 92);
             this.TxtIssues.TabIndex = 7;
             // 
             // TxtWorkRates
@@ -78,12 +80,12 @@
             this.TxtWorkRates.Multiline = true;
             this.TxtWorkRates.Name = "TxtWorkRates";
             this.TxtWorkRates.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtWorkRates.Size = new System.Drawing.Size(484, 73);
+            this.TxtWorkRates.Size = new System.Drawing.Size(418, 73);
             this.TxtWorkRates.TabIndex = 6;
             // 
             // BtnParseFromTextBox
             // 
-            this.BtnParseFromTextBox.Location = new System.Drawing.Point(264, 56);
+            this.BtnParseFromTextBox.Location = new System.Drawing.Point(198, 54);
             this.BtnParseFromTextBox.Name = "BtnParseFromTextBox";
             this.BtnParseFromTextBox.Size = new System.Drawing.Size(93, 23);
             this.BtnParseFromTextBox.TabIndex = 5;
@@ -97,7 +99,7 @@
             this.TxtJson.Multiline = true;
             this.TxtJson.Name = "TxtJson";
             this.TxtJson.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtJson.Size = new System.Drawing.Size(483, 76);
+            this.TxtJson.Size = new System.Drawing.Size(417, 76);
             this.TxtJson.TabIndex = 4;
             this.TxtJson.Text = resources.GetString("TxtJson.Text");
             // 
@@ -107,7 +109,7 @@
             this.TxtColumns.Multiline = true;
             this.TxtColumns.Name = "TxtColumns";
             this.TxtColumns.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtColumns.Size = new System.Drawing.Size(484, 77);
+            this.TxtColumns.Size = new System.Drawing.Size(418, 77);
             this.TxtColumns.TabIndex = 8;
             // 
             // TxtAverage
@@ -116,14 +118,14 @@
             this.TxtAverage.Multiline = true;
             this.TxtAverage.Name = "TxtAverage";
             this.TxtAverage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtAverage.Size = new System.Drawing.Size(484, 182);
+            this.TxtAverage.Size = new System.Drawing.Size(418, 182);
             this.TxtAverage.TabIndex = 10;
             // 
             // BtnLoadAndParseJSON
             // 
-            this.BtnLoadAndParseJSON.Location = new System.Drawing.Point(312, 30);
+            this.BtnLoadAndParseJSON.Location = new System.Drawing.Point(264, 28);
             this.BtnLoadAndParseJSON.Name = "BtnLoadAndParseJSON";
-            this.BtnLoadAndParseJSON.Size = new System.Drawing.Size(183, 23);
+            this.BtnLoadAndParseJSON.Size = new System.Drawing.Size(165, 23);
             this.BtnLoadAndParseJSON.TabIndex = 11;
             this.BtnLoadAndParseJSON.Text = "Load and Parse JSON from .txt";
             this.BtnLoadAndParseJSON.UseVisualStyleBackColor = true;
@@ -133,7 +135,7 @@
             // 
             this.TxtJSONPath.Location = new System.Drawing.Point(65, 30);
             this.TxtJSONPath.Name = "TxtJSONPath";
-            this.TxtJSONPath.Size = new System.Drawing.Size(241, 20);
+            this.TxtJSONPath.Size = new System.Drawing.Size(193, 20);
             this.TxtJSONPath.TabIndex = 12;
             this.TxtJSONPath.Text = "C:\\Users\\Greg\\Desktop\\Delete\\ONJSON.txt";
             // 
@@ -148,7 +150,7 @@
             // 
             // BtnParseFromCoded
             // 
-            this.BtnParseFromCoded.Location = new System.Drawing.Point(370, 56);
+            this.BtnParseFromCoded.Location = new System.Drawing.Point(304, 54);
             this.BtnParseFromCoded.Name = "BtnParseFromCoded";
             this.BtnParseFromCoded.Size = new System.Drawing.Size(125, 23);
             this.BtnParseFromCoded.TabIndex = 14;
@@ -158,7 +160,7 @@
             // 
             // BtnGetBoards
             // 
-            this.BtnGetBoards.Location = new System.Drawing.Point(501, 30);
+            this.BtnGetBoards.Location = new System.Drawing.Point(435, 30);
             this.BtnGetBoards.Name = "BtnGetBoards";
             this.BtnGetBoards.Size = new System.Drawing.Size(74, 23);
             this.BtnGetBoards.TabIndex = 15;
@@ -169,19 +171,19 @@
             // CboBoards
             // 
             this.CboBoards.FormattingEnabled = true;
-            this.CboBoards.Location = new System.Drawing.Point(581, 32);
+            this.CboBoards.Location = new System.Drawing.Point(515, 32);
             this.CboBoards.MaxDropDownItems = 50;
             this.CboBoards.Name = "CboBoards";
-            this.CboBoards.Size = new System.Drawing.Size(214, 21);
+            this.CboBoards.Size = new System.Drawing.Size(124, 21);
             this.CboBoards.TabIndex = 16;
             // 
             // TxtBoards
             // 
-            this.TxtBoards.Location = new System.Drawing.Point(501, 74);
+            this.TxtBoards.Location = new System.Drawing.Point(435, 74);
             this.TxtBoards.Multiline = true;
             this.TxtBoards.Name = "TxtBoards";
             this.TxtBoards.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtBoards.Size = new System.Drawing.Size(483, 85);
+            this.TxtBoards.Size = new System.Drawing.Size(419, 85);
             this.TxtBoards.TabIndex = 17;
             this.TxtBoards.Text = resources.GetString("TxtBoards.Text");
             // 
@@ -224,7 +226,7 @@
             // LblBoardsJSON
             // 
             this.LblBoardsJSON.AutoSize = true;
-            this.LblBoardsJSON.Location = new System.Drawing.Point(498, 58);
+            this.LblBoardsJSON.Location = new System.Drawing.Point(432, 58);
             this.LblBoardsJSON.Name = "LblBoardsJSON";
             this.LblBoardsJSON.Size = new System.Drawing.Size(86, 13);
             this.LblBoardsJSON.TabIndex = 22;
@@ -242,7 +244,7 @@
             // CboFilters
             // 
             this.CboFilters.FormattingEnabled = true;
-            this.CboFilters.Location = new System.Drawing.Point(585, 354);
+            this.CboFilters.Location = new System.Drawing.Point(519, 354);
             this.CboFilters.MaxDropDownItems = 50;
             this.CboFilters.Name = "CboFilters";
             this.CboFilters.Size = new System.Drawing.Size(214, 21);
@@ -250,7 +252,7 @@
             // 
             // BtnFilters
             // 
-            this.BtnFilters.Location = new System.Drawing.Point(505, 352);
+            this.BtnFilters.Location = new System.Drawing.Point(439, 352);
             this.BtnFilters.Name = "BtnFilters";
             this.BtnFilters.Size = new System.Drawing.Size(74, 23);
             this.BtnFilters.TabIndex = 24;
@@ -260,18 +262,18 @@
             // 
             // TxtFilters
             // 
-            this.TxtFilters.Location = new System.Drawing.Point(505, 394);
+            this.TxtFilters.Location = new System.Drawing.Point(439, 394);
             this.TxtFilters.Multiline = true;
             this.TxtFilters.Name = "TxtFilters";
             this.TxtFilters.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtFilters.Size = new System.Drawing.Size(479, 59);
+            this.TxtFilters.Size = new System.Drawing.Size(415, 59);
             this.TxtFilters.TabIndex = 26;
             this.TxtFilters.Text = resources.GetString("TxtFilters.Text");
             // 
             // LblFilterJSON
             // 
             this.LblFilterJSON.AutoSize = true;
-            this.LblFilterJSON.Location = new System.Drawing.Point(505, 378);
+            this.LblFilterJSON.Location = new System.Drawing.Point(439, 378);
             this.LblFilterJSON.Name = "LblFilterJSON";
             this.LblFilterJSON.Size = new System.Drawing.Size(63, 13);
             this.LblFilterJSON.TabIndex = 27;
@@ -280,7 +282,7 @@
             // LblBoardData
             // 
             this.LblBoardData.AutoSize = true;
-            this.LblBoardData.Location = new System.Drawing.Point(501, 162);
+            this.LblBoardData.Location = new System.Drawing.Point(435, 162);
             this.LblBoardData.Name = "LblBoardData";
             this.LblBoardData.Size = new System.Drawing.Size(64, 13);
             this.LblBoardData.TabIndex = 29;
@@ -288,17 +290,17 @@
             // 
             // TxtBoardData
             // 
-            this.TxtBoardData.Location = new System.Drawing.Point(504, 178);
+            this.TxtBoardData.Location = new System.Drawing.Point(438, 178);
             this.TxtBoardData.Multiline = true;
             this.TxtBoardData.Name = "TxtBoardData";
             this.TxtBoardData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtBoardData.Size = new System.Drawing.Size(480, 168);
+            this.TxtBoardData.Size = new System.Drawing.Size(416, 168);
             this.TxtBoardData.TabIndex = 28;
             // 
             // LblFilterData
             // 
             this.LblFilterData.AutoSize = true;
-            this.LblFilterData.Location = new System.Drawing.Point(501, 456);
+            this.LblFilterData.Location = new System.Drawing.Point(435, 456);
             this.LblFilterData.Name = "LblFilterData";
             this.LblFilterData.Size = new System.Drawing.Size(58, 13);
             this.LblFilterData.TabIndex = 31;
@@ -306,11 +308,11 @@
             // 
             // TxtFilterData
             // 
-            this.TxtFilterData.Location = new System.Drawing.Point(504, 472);
+            this.TxtFilterData.Location = new System.Drawing.Point(438, 472);
             this.TxtFilterData.Multiline = true;
             this.TxtFilterData.Name = "TxtFilterData";
             this.TxtFilterData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtFilterData.Size = new System.Drawing.Size(480, 188);
+            this.TxtFilterData.Size = new System.Drawing.Size(416, 188);
             this.TxtFilterData.TabIndex = 30;
             // 
             // MnuView
@@ -320,7 +322,7 @@
             this.MnuView.Location = new System.Drawing.Point(0, 0);
             this.MnuView.Name = "MnuView";
             this.MnuView.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.MnuView.Size = new System.Drawing.Size(997, 24);
+            this.MnuView.Size = new System.Drawing.Size(866, 24);
             this.MnuView.TabIndex = 32;
             this.MnuView.Text = "Menu";
             // 
@@ -347,11 +349,32 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
+            // CboProjects
+            // 
+            this.CboProjects.FormattingEnabled = true;
+            this.CboProjects.Location = new System.Drawing.Point(725, 32);
+            this.CboProjects.MaxDropDownItems = 50;
+            this.CboProjects.Name = "CboProjects";
+            this.CboProjects.Size = new System.Drawing.Size(129, 21);
+            this.CboProjects.TabIndex = 34;
+            // 
+            // BtnProjects
+            // 
+            this.BtnProjects.Location = new System.Drawing.Point(645, 30);
+            this.BtnProjects.Name = "BtnProjects";
+            this.BtnProjects.Size = new System.Drawing.Size(74, 23);
+            this.BtnProjects.TabIndex = 33;
+            this.BtnProjects.Text = "Get Projects";
+            this.BtnProjects.UseVisualStyleBackColor = true;
+            this.BtnProjects.Click += new System.EventHandler(this.BtnProjects_Click);
+            // 
             // FormJson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 670);
+            this.ClientSize = new System.Drawing.Size(866, 670);
+            this.Controls.Add(this.CboProjects);
+            this.Controls.Add(this.BtnProjects);
             this.Controls.Add(this.LblFilterData);
             this.Controls.Add(this.TxtFilterData);
             this.Controls.Add(this.LblBoardData);
@@ -380,6 +403,7 @@
             this.Controls.Add(this.BtnParseFromTextBox);
             this.Controls.Add(this.TxtJson);
             this.Controls.Add(this.MnuView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MnuView;
             this.Name = "FormJson";
             this.Text = "Json Test";
@@ -423,5 +447,7 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manualEntryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ComboBox CboProjects;
+        private System.Windows.Forms.Button BtnProjects;
     }
 }
